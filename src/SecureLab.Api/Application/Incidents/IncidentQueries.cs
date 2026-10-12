@@ -7,6 +7,35 @@ namespace SecureLab.Api.Application.Incidents;
 
 public sealed class IncidentQueries(SecureLabDbContext dbContext, ILogger<IncidentQueries> logger)
 {
+    public async Task<IReadOnlyList<IncidentSeveritySummaryResponse>> GetSeveritySummaryAsync(
+        IncidentStatus? status,
+        CancellationToken cancellationToken)
+    {
+        var query = dbContext.Incidents.AsNoTracking();
+        if (status is not null)
+        {
+            query = query.Where(incident => incident.Status == status);
+        }
+
+        // PostgreSQL counts groups; missing enum levels are filled with zeros afterwards.
+        var groups = await query
+            .GroupBy(incident => incident.Severity)
+            .Select(group => new { Severity = group.Key, Count = group.Count() })
+            .ToListAsync(cancellationToken);
+
+        IncidentSeverity[] severityOrder =
+            [IncidentSeverity.Low, IncidentSeverity.Medium, IncidentSeverity.High, IncidentSeverity.Critical];
+        var counts = groups.ToDictionary(group => group.Severity, group => group.Count);
+        var result = severityOrder
+            .Select(severity => new IncidentSeveritySummaryResponse(
+                severity.ToString(), counts.GetValueOrDefault(severity)))
+            .ToList();
+
+        logger.LogInformation("Loaded severity summary with status {Status}: {GroupCount} groups",
+            status, result.Count);
+        return result;
+    }
+
     public async Task<IReadOnlyList<IncidentListItemResponse>> GetListAsync(
         IncidentStatus? status,
         CancellationToken cancellationToken)

@@ -1,5 +1,7 @@
 namespace SecureLab.Api.Presentation.Contracts;
 
+public sealed record IncidentSeveritySummaryResponse(string Severity, int Count);
+
 public sealed record IncidentListItemResponse(
     Guid Id,
     string Title,
