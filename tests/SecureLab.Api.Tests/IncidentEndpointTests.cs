@@ -11,6 +11,42 @@ public sealed class IncidentEndpointTests(SecureLabApiFactory factory)
 {
     private readonly HttpClient _client = factory.CreateClient();
 
+    [Theory]
+    [InlineData("", "Low,Medium,High,Critical", "1,1,1,0")]
+    [InlineData("?status=Triaged", "Low,Medium,High,Critical", "0,1,0,0")]
+    [InlineData("?status=Resolved", "Low,Medium,High,Critical", "0,0,0,0")]
+    public async Task GetSeveritySummary_ReturnsOnlyOrderedAggregateFields(
+        string query, string expectedSeverities, string expectedCounts)
+    {
+        using var response = await _client.GetAsync("/api/incidents/severity-summary" + query);
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal("application/json", response.Content.Headers.ContentType?.MediaType);
+        using var document = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+        Assert.Equal(JsonValueKind.Array, document.RootElement.ValueKind);
+        var items = document.RootElement.EnumerateArray().ToArray();
+        Assert.Equal(expectedSeverities, string.Join(",", items.Select(item => item.GetProperty("severity").GetString())));
+        Assert.Equal(expectedCounts, string.Join(",", items.Select(item => item.GetProperty("count").GetInt32())));
+        foreach (var item in items)
+        {
+            Assert.Equal(new[] { "count", "severity" },
+                item.EnumerateObject().Select(property => property.Name).OrderBy(name => name).ToArray());
+        }
+    }
+
+    [Theory]
+    [InlineData("Unknown")]
+    [InlineData("1")]
+    [InlineData("")]
+    public async Task GetSeveritySummary_ForUnsupportedStatus_ReturnsValidationProblem(string status)
+    {
+        using var response = await _client.GetAsync("/api/incidents/severity-summary?status=" + status);
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        Assert.Equal("application/problem+json", response.Content.Headers.ContentType?.MediaType);
+        using var document = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+        Assert.Equal(400, document.RootElement.GetProperty("status").GetInt32());
+        Assert.True(document.RootElement.GetProperty("errors").TryGetProperty("status", out _));
+    }
+
     [Fact]
     public async Task GetList_ReturnsSeededIncidents()
     {

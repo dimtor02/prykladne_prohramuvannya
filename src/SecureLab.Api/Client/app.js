@@ -2,6 +2,10 @@ const listElement = document.querySelector("#incident-list");
 const listStatusElement = document.querySelector("#list-status");
 const detailsElement = document.querySelector("#incident-details");
 const filterForm = document.querySelector("#filter-form");
+const summaryForm = document.querySelector("#summary-form");
+const summaryList = document.querySelector("#severity-summary");
+const summaryStatus = document.querySelector("#summary-status");
+const summaryButton = document.querySelector("#summary-button");
 
 async function apiFetch(path, options = {}) {
   const response = await fetch(path, {
@@ -102,6 +106,43 @@ async function loadIncidentDetails(id) {
     detailsElement.textContent = `Помилка: ${error.message}`;
   }
 }
+
+async function loadSeveritySummary() {
+  summaryStatus.textContent = "Завантаження…";
+  summaryList.replaceChildren();
+  summaryButton.disabled = true;
+  summaryList.setAttribute("aria-busy", "true");
+  const status = new FormData(summaryForm).get("status");
+  const query = status ? `?status=${encodeURIComponent(status)}` : "";
+
+  try {
+    const summaries = await apiFetch(`/api/incidents/severity-summary${query}`);
+    if (summaries.length === 0) {
+      summaryStatus.textContent = "Даних немає.";
+      return;
+    }
+    for (const summary of summaries) {
+      const item = document.createElement("li");
+      item.textContent = `${summary.severity}: ${summary.count}`;
+      summaryList.append(item);
+    }
+    const total = summaries.reduce((sum, summary) => sum + summary.count, 0);
+    summaryStatus.textContent = total === 0
+      ? "Даних немає. Інцидентів: 0."
+      : `Інцидентів: ${total}`;
+  } catch {
+    summaryList.replaceChildren();
+    summaryStatus.textContent = "Не вдалося завантажити підсумок. Спробуйте ще раз.";
+  } finally {
+    summaryButton.disabled = false;
+    summaryList.setAttribute("aria-busy", "false");
+  }
+}
+
+summaryForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  loadSeveritySummary();
+});
 
 filterForm.addEventListener("submit", (event) => {
   event.preventDefault();
