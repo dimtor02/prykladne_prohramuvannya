@@ -12,7 +12,7 @@ public sealed class IncidentEndpointTests(SecureLabApiFactory factory)
     private readonly HttpClient _client = factory.CreateClient();
 
     [Theory]
-    [InlineData("", "Low,Medium,High,Critical", "1,1,1,0")]
+    [InlineData("", "Low,Medium,High,Critical", "3,1,1,0")]
     [InlineData("?status=Triaged", "Low,Medium,High,Critical", "0,1,0,0")]
     [InlineData("?status=Resolved", "Low,Medium,High,Critical", "0,0,0,0")]
     public async Task GetSeveritySummary_ReturnsOnlyOrderedAggregateFields(

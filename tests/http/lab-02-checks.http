@@ -1,0 +1,4 @@
+@api = http://localhost:5080
+
+### USB: scaffold installation check (200, one incident)
+GET {{api}}/api/incidents/search?q=USB
