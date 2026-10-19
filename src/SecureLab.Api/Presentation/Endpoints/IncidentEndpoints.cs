@@ -21,14 +21,39 @@ public static class IncidentEndpoints
             .Produces<IncidentDetailsResponse>()
             .ProducesProblem(StatusCodes.Status404NotFound);
 
-        group.MapGet("/severity-summary", () => Results.Problem(
-                title: "Точку розширення ще не реалізовано",
-                detail: "Завершіть цей endpoint під час лабораторної роботи № 1.",
-                statusCode: StatusCodes.Status501NotImplemented))
+        group.MapGet("/severity-summary", GetSeveritySummaryAsync)
             .WithName("GetIncidentSeveritySummary")
-            .ProducesProblem(StatusCodes.Status501NotImplemented);
+            .Produces<IReadOnlyList<IncidentSeveritySummaryResponse>>()
+            .ProducesValidationProblem();
 
         return endpoints;
+    }
+
+    private static async Task<IResult> GetSeveritySummaryAsync(
+        string? status,
+        IncidentQueries queries,
+        CancellationToken cancellationToken)
+    {
+        // Explicit names only: numeric enum representations are not part of the API contract.
+        IncidentStatus? parsedStatus = status switch
+        {
+            null => null,
+            "New" => IncidentStatus.New,
+            "Triaged" => IncidentStatus.Triaged,
+            "InProgress" => IncidentStatus.InProgress,
+            "Resolved" => IncidentStatus.Resolved,
+            "Closed" => IncidentStatus.Closed,
+            _ => null
+        };
+        if (status is not null && parsedStatus is null)
+        {
+            return Results.ValidationProblem(new Dictionary<string, string[]>
+            {
+                ["status"] = ["Допустимі значення: New, Triaged, InProgress, Resolved, Closed."]
+            });
+        }
+
+        return Results.Ok(await queries.GetSeveritySummaryAsync(parsedStatus, cancellationToken));
     }
 
     private static async Task<IResult> GetListAsync(

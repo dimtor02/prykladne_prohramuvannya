@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Навчальний трекер інцидентів</title>
   <link rel="stylesheet" href="/styles.css">
-  <script src="/app.js" defer></script>
+  <script src="/app.js?v=lr01-full-summary" defer></script>
 </head>
 <body>
   <header class="page-header">
@@ -38,6 +38,24 @@
         </form>
       </div>
       <ul id="incident-list" class="incident-list"></ul>
+    </section>
+
+    <section class="panel" aria-labelledby="summary-title">
+      <h2 id="summary-title">Підсумок за критичністю</h2>
+      <form id="summary-form">
+        <label for="summary-filter">Статус для підсумку</label>
+        <select id="summary-filter" name="status">
+          <option value="">Усі</option>
+          <option value="New">New</option>
+          <option value="Triaged">Triaged</option>
+          <option value="InProgress">InProgress</option>
+          <option value="Resolved">Resolved</option>
+          <option value="Closed">Closed</option>
+        </select>
+        <button id="summary-button" type="submit">Показати підсумок</button>
+      </form>
+      <p id="summary-status" role="status" aria-live="polite">Натисніть «Показати підсумок».</p>
+      <ul id="severity-summary" aria-labelledby="summary-title"></ul>
     </section>
 
     <section class="panel" aria-labelledby="details-title">
