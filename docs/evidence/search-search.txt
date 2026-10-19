@@ -1,0 +1,19 @@
+Extracted from passed integration tests. Times: 2026-10-19T20:50:52.5720995+03:00 -> 2026-10-19T20:50:56.1261819+03:00
+
+SEARCH/literal-"%" HTTP 200; exact two IDs matched Title/Description; decoy excluded
+
+SEARCH/literal-"\\" HTTP 200; exact two IDs matched Title/Description; decoy excluded
+
+SEARCH/literal-"\\%_" HTTP 200; exact two IDs matched Title/Description; decoy excluded
+
+SEARCH/literal-"_" HTTP 200; exact two IDs matched Title/Description; decoy excluded
+
+SEARCH/sort- HTTP 200; exact first 50 of 60 IDs; semantic rank/date order and Id tie-break verified
+
+SEARCH/sort-createdAtUtc HTTP 200; exact first 50 of 60 IDs; semantic rank/date order and Id tie-break verified
+
+SEARCH/sort-severity HTTP 200; exact first 50 of 60 IDs; semantic rank/date order and Id tie-break verified
+
+SEARCH/sort-status HTTP 200; exact first 50 of 60 IDs; semantic rank/date order and Id tie-break verified
+
+SEARCH/sort-missing HTTP 200; exact first 50 of 60 IDs; semantic rank/date order and Id tie-break verified
