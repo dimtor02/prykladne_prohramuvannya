@@ -1,5 +1,5 @@
-Extracted from passed integration tests. Times: 2026-10-19T18:15:11.6960610+03:00 -> 2026-10-19T18:15:15.6871492+03:00
+Extracted from passed integration tests. Times: 2026-10-19T20:50:52.5720995+03:00 -> 2026-10-19T20:50:56.1261819+03:00
 
 T-01/limits HTTP 201; title.Length=160; description.Length=4000; date=UTC now+4min
 
-T-01/CP-01 HTTP 201 application/json {"id":"9c8c86e4-f7c4-4909-8eb4-aa3a1cf33173","title":"Lr02-aca82fabcd1b4c39b1311e6ecf5c2ca2","description":"Lr02-aca82fabcd1b4c39b1311e6ecf5c2ca2 description","severity":"Low","status":"New","occurredAtUtc":"2026-09-01T10:00:00+00:00","createdAtUtc":"2026-10-19T15:15:15.4460001+00:00"}; Location=/api/incidents/9c8c86e4-f7c4-4909-8eb4-aa3a1cf33173; GET ownerDisplayName=Аліса Коваль; server fields verified in DB
+T-01/CP-01 HTTP 201 application/json {"id":"5b5cd23b-690e-42ef-b2c6-1a04b4e3c96c","title":"Lr02-1bfae93232f946099e720a236dd4d42a","description":"Lr02-1bfae93232f946099e720a236dd4d42a description","severity":"Low","status":"New","occurredAtUtc":"2026-09-01T10:00:00+00:00","createdAtUtc":"2026-10-19T17:50:55.8558154+00:00"}; Location=/api/incidents/5b5cd23b-690e-42ef-b2c6-1a04b4e3c96c; GET ownerDisplayName=Аліса Коваль; server fields verified in DB

@@ -1,9 +1,9 @@
-Extracted from passed integration tests. Times: 2026-10-19T18:15:11.6960610+03:00 -> 2026-10-19T18:15:15.6871492+03:00
+Extracted from passed integration tests. Times: 2026-10-19T20:50:52.5720995+03:00 -> 2026-10-19T20:50:56.1261819+03:00
 
-T-09/Critical/39 HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"description":["Для High або Critical опис після обрізання пробілів має містити щонайменше 40 символів."]},"traceId":"00-f73c71d18346d061846e7a078ae65438-fc4d02e38a4208af-00"}
+T-09/Critical/39 HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"description":["Для High або Critical опис після обрізання пробілів має містити щонайменше 40 символів."]},"traceId":"00-b68ee5b8f6cb7efce90d5357eeec44f7-92eb9aa5cae54741-00"}
 
-T-09/Critical/40 HTTP 201 {"id":"d52c6f54-5229-4b03-a305-5c8e2d8edad2","title":"Lr02-afef87888d3b4dd6aae0542e2e77fccc","description":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","severity":"Critical","status":"New","occurredAtUtc":"2026-09-01T10:00:00+00:00","createdAtUtc":"2026-10-19T15:15:15.3486805+00:00"}
+T-09/Critical/40 HTTP 201 {"id":"a2d58f6a-4919-4554-b07f-527b573e501a","title":"Lr02-1e8c716355564e589494d13d7b72880d","description":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","severity":"Critical","status":"New","occurredAtUtc":"2026-09-01T10:00:00+00:00","createdAtUtc":"2026-10-19T17:50:55.7704709+00:00"}
 
-T-09/High/39 HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"description":["Для High або Critical опис після обрізання пробілів має містити щонайменше 40 символів."]},"traceId":"00-0b156839837100a525fbd5edf1296c76-60f1d1c2823188d8-00"}
+T-09/High/39 HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"description":["Для High або Critical опис після обрізання пробілів має містити щонайменше 40 символів."]},"traceId":"00-8b47a252f2d1c49baeadf642f1f9ecb5-efe08ccc046516ac-00"}
 
-T-09/High/40 HTTP 201 {"id":"f590c723-734c-4cc1-938f-b7f88673a83d","title":"Lr02-5f49e249218947aa9e286fc7c2850a1f","description":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","severity":"High","status":"New","occurredAtUtc":"2026-09-01T10:00:00+00:00","createdAtUtc":"2026-10-19T15:15:15.3732955+00:00"}
+T-09/High/40 HTTP 201 {"id":"65497e24-ade7-457a-877d-3cd238ca8599","title":"Lr02-9a68369393ab4e02a1ecc2861608438a","description":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","severity":"High","status":"New","occurredAtUtc":"2026-09-01T10:00:00+00:00","createdAtUtc":"2026-10-19T17:50:55.7951258+00:00"}
