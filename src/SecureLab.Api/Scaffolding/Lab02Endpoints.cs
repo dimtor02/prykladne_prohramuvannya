@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SecureLab.Api.Application.Incidents;
 using SecureLab.Api.Data;
 using SecureLab.Api.Data.Entities;
 using SecureLab.Api.Presentation.Contracts;
@@ -10,27 +11,31 @@ public static class Lab02Endpoints
 {
     public static void MapLab02Endpoints(this WebApplication app)
     {
-        app.MapGet("/api/incidents/search", async (string? q, string? sortBy, SecureLabDbContext db, CancellationToken ct) =>
-        {
-            var order = sortBy switch
-            {
-                null or "" or "createdAtUtc" => "created_at_utc DESC",
-                "severity" => "severity", "status" => "status", _ => sortBy
-            };
-            var sql = "SELECT * FROM incidents WHERE title ILIKE '%" + (q ?? "")
-                + "%' OR description ILIKE '%" + (q ?? "") + "%' ORDER BY " + order + " LIMIT 50";
-            var rows = await db.Incidents.FromSqlRaw(sql).AsNoTracking().ToListAsync(ct);
-            return Results.Ok(rows.Select(row => new
-            {
-                row.Id, row.Title, row.Description,
-                Severity = row.Severity.ToString(), Status = row.Status.ToString(), row.CreatedAtUtc
-            }));
-        });
+        app.MapGet("/api/incidents/search", SearchIncidentsAsync)
+            .WithName("SearchIncidents")
+            .Produces<IReadOnlyList<IncidentSearchResponse>>()
+            .ProducesValidationProblem();
         app.MapPost("/api/incidents", CreateIncidentAsync)
             .WithName("CreateIncident")
             .Produces<CreatedIncidentResponse>(StatusCodes.Status201Created)
             .ProducesValidationProblem()
             .ProducesProblem(StatusCodes.Status409Conflict);
+    }
+
+    private static async Task<IResult> SearchIncidentsAsync(
+        string? q,
+        string? sortBy,
+        IncidentQueries queries,
+        CancellationToken ct)
+    {
+        if (sortBy is not (null or "" or "createdAtUtc" or "severity" or "status"))
+            return Results.ValidationProblem(new Dictionary<string, string[]>
+            {
+                ["sortBy"] = ["Допустимі значення: createdAtUtc, severity, status."]
+            });
+
+        var sort = sortBy is null or "" ? "createdAtUtc" : sortBy;
+        return Results.Ok(await queries.SearchAsync(q, sort, ct));
     }
 
     private static async Task<IResult> CreateIncidentAsync(

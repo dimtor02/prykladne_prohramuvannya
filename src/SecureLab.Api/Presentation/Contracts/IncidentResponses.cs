@@ -11,6 +11,14 @@ public sealed record CreatedIncidentResponse(
 
 public sealed record IncidentSeveritySummaryResponse(string Severity, int Count);
 
+public sealed record IncidentSearchResponse(
+    Guid Id,
+    string Title,
+    string Description,
+    string Severity,
+    string Status,
+    DateTimeOffset CreatedAtUtc);
+
 public sealed record IncidentListItemResponse(
     Guid Id,
     string Title,
