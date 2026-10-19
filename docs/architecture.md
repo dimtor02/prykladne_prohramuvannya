@@ -68,7 +68,17 @@ UI показує завантаження, результат, окремий �
 | API → PostgreSQL | status та id з HTTP | Типізований LINQ/EF Core, параметризовані значення, відсутність складання SQL рядками |
 | БД → API → DOM | Раніше збережені title/description/comment | Мінімальні DTO, textContent/createTextNode; дані не стають HTML |
 
-Це навчальний baseline без автентифікації; summary не додає авторизацію.
+У ЛР 3 використовується ASP.NET Core Identity з EF stores і cookie Identity.Application.
+UseAuthentication формує HttpContext.User, UseAuthorization захищає /api/me та POST /api/incidents.
+Owner нового інциденту читається з NameIdentifier, клієнтські ownerUserId та X-Demo-UserId ігноруються.
+Публічні list/details/search/summary поки не перевіряють права на чужі записи: це тема ЛР 4.
+
+RegisterRequest і LoginRequest відокремлено від ApplicationUser; UserProfileResponse містить лише id/userName/displayName.
+UserManager.CreateAsync і SignInManager.PasswordSignInAsync використовують стандартний password hasher.
+Після UseAuthorization виконується UseRateLimiter; політика login обмежує лише POST /api/auth/login:
+10 запитів/60 секунд на транспортну IP-адресу, без довіри до X-Forwarded-For.
+Після logout SignInManager.SignOutAsync очищує cookie поточного клієнта.
+HttpOnly/Lax/Secure не замінюють повну CSRF-модель, яку буде завершено в ЛР 6.
 
 ## Конфігурація та повернення seed
 

@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using SecureLab.Api.Application.Incidents;
 using SecureLab.Api.Data;
@@ -16,6 +17,7 @@ public static class Lab02Endpoints
             .Produces<IReadOnlyList<IncidentSearchResponse>>()
             .ProducesValidationProblem();
         app.MapPost("/api/incidents", CreateIncidentAsync)
+            .RequireAuthorization()
             .WithName("CreateIncident")
             .Produces<CreatedIncidentResponse>(StatusCodes.Status201Created)
             .ProducesValidationProblem()
@@ -40,9 +42,13 @@ public static class Lab02Endpoints
 
     private static async Task<IResult> CreateIncidentAsync(
         CreateIncidentRequest request,
+        HttpContext context,
         SecureLabDbContext db,
         CancellationToken ct)
     {
+        if (!Guid.TryParse(context.User.FindFirstValue(ClaimTypes.NameIdentifier), out var ownerId)
+            || !await db.Users.AnyAsync(user => user.Id == ownerId, ct))
+            return Results.Unauthorized();
         var now = DateTimeOffset.UtcNow;
         var title = request.Title?.Trim() ?? "";
         var description = request.Description?.Trim() ?? "";
@@ -87,7 +93,7 @@ public static class Lab02Endpoints
         var incident = new Incident
         {
             Id = Guid.NewGuid(),
-            OwnerUserId = DbSeeder.AliceId,
+            OwnerUserId = ownerId,
             Title = title,
             Description = description,
             Severity = severity,

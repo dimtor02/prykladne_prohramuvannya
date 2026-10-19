@@ -10,9 +10,12 @@ using Xunit.Abstractions;
 
 namespace SecureLab.Api.Tests;
 
-public sealed class IncidentCreationTests(SecureLabApiFactory factory, ITestOutputHelper output)
-    : IClassFixture<SecureLabApiFactory>
+// Each test owns a fresh host so login quotas do not couple independent LR2 regressions.
+public sealed class IncidentCreationTests(ITestOutputHelper output) : IAsyncLifetime
 {
+    private readonly SecureLabApiFactory factory = new();
+    public Task InitializeAsync() => Task.CompletedTask;
+    public Task DisposeAsync() => factory.DisposeAsync().AsTask();
     private static Dictionary<string, object?> ValidBody(string marker) => new()
     {
         ["title"] = marker,
@@ -80,7 +83,7 @@ public sealed class IncidentCreationTests(SecureLabApiFactory factory, ITestOutp
         }
         try
         {
-            using var client = factory.CreateClient();
+            using var client = await factory.LoginSeedAsync("alice");
             using var response = await client.PostAsJsonAsync("/api/incidents", body);
             using var problem = await ReadProblemAsync(response, HttpStatusCode.BadRequest, $"T-02/{scenario}");
             Assert.True(problem.RootElement.GetProperty("errors").TryGetProperty(field, out _));
@@ -106,7 +109,7 @@ public sealed class IncidentCreationTests(SecureLabApiFactory factory, ITestOutp
         body["updatedAtUtc"] = "2000-01-01T00:00:00Z";
         try
         {
-            using var client = factory.CreateClient();
+            using var client = await factory.LoginSeedAsync("alice");
             var before = DateTimeOffset.UtcNow;
             using var response = await client.PostAsJsonAsync("/api/incidents", body);
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
@@ -148,7 +151,7 @@ public sealed class IncidentCreationTests(SecureLabApiFactory factory, ITestOutp
         var marker = $"Lr02-{Guid.NewGuid():N}";
         try
         {
-            using var client = factory.CreateClient();
+            using var client = await factory.LoginSeedAsync("alice");
             using var first = await client.PostAsJsonAsync("/api/incidents", ValidBody(marker));
             Assert.Equal(HttpStatusCode.Created, first.StatusCode);
             await using var scope = factory.Services.CreateAsyncScope();
@@ -173,7 +176,7 @@ public sealed class IncidentCreationTests(SecureLabApiFactory factory, ITestOutp
         var marker = $"Lr02-{Guid.NewGuid():N}";
         try
         {
-            using var client = factory.CreateClient();
+            using var client = await factory.LoginSeedAsync("alice");
             using var first = await client.PostAsJsonAsync("/api/incidents", ValidBody(marker));
             Assert.Equal(HttpStatusCode.Created, first.StatusCode);
             if (closed)
@@ -206,7 +209,7 @@ public sealed class IncidentCreationTests(SecureLabApiFactory factory, ITestOutp
         body["description"] = $"  {new string('x', length)}  ";
         try
         {
-            using var client = factory.CreateClient();
+            using var client = await factory.LoginSeedAsync("alice");
             using var response = await client.PostAsJsonAsync("/api/incidents", body);
             if (valid)
             {
@@ -235,7 +238,7 @@ public sealed class IncidentCreationTests(SecureLabApiFactory factory, ITestOutp
         body["occurredAtUtc"] = DateTimeOffset.UtcNow.AddMinutes(4);
         try
         {
-            using var client = factory.CreateClient();
+            using var client = await factory.LoginSeedAsync("alice");
             using var response = await client.PostAsJsonAsync("/api/incidents", body);
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
             var created = await response.Content.ReadFromJsonAsync<CreatedIncidentResponse>();
@@ -250,7 +253,7 @@ public sealed class IncidentCreationTests(SecureLabApiFactory factory, ITestOutp
     [Fact]
     public async Task T06_UnknownIncident_ReturnsSafe404()
     {
-        using var client = factory.CreateClient();
+        using var client = await factory.LoginSeedAsync("alice");
         using var response = await client.GetAsync($"/api/incidents/{Guid.NewGuid()}");
         using var problem = await ReadProblemAsync(response, HttpStatusCode.NotFound, "T-06");
         Assert.Equal("Інцидент не знайдено", problem.RootElement.GetProperty("title").GetString());

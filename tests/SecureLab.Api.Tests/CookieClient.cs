@@ -5,7 +5,11 @@ namespace SecureLab.Api.Tests;
 
 public static class CookieClient
 {
-    public static async Task<HttpClient> LoginAsync(this SecureLabApiFactory factory, string userName, string password)
+    public static Task<HttpClient> LoginSeedAsync(this WebApplicationFactory<Program> factory, string userName) =>
+        factory.LoginAsync(userName, Environment.GetEnvironmentVariable("SeedUsers__Password")
+            ?? throw new InvalidOperationException("Set local SeedUsers__Password outside Git."));
+
+    public static async Task<HttpClient> LoginAsync(this WebApplicationFactory<Program> factory, string userName, string password)
     {
         var client = factory.CreateClient(new WebApplicationFactoryClientOptions
         {
