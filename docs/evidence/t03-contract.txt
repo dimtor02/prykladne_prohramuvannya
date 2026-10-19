@@ -1,0 +1,13 @@
+Extracted from passed integration tests. Times: 2026-10-19T18:15:11.6960610+03:00 -> 2026-10-19T18:15:15.6871492+03:00
+
+T-03/different-case HTTP 201 {"id":"b7d59ad9-706b-4865-b0e5-498d4c86bbce","title":"LR02-1110D87C64F5436FB8579161E764E2B7","description":"Штучний опис інциденту для тесту Lr02-1110d87c64f5436fb8579161e764e2b7.","severity":"Low","status":"New","occurredAtUtc":"2026-09-01T10:00:00+00:00","createdAtUtc":"2026-10-19T15:15:15.4173901+00:00"}
+
+T-03/Closed HTTP 201 {"id":"bb5700e4-e79a-4497-a94b-5a2ae715ba8f","title":"Lr02-981723bbf9584af2885aa3881994ed19","description":"Штучний опис інциденту для тесту Lr02-981723bbf9584af2885aa3881994ed19.","severity":"Low","status":"New","occurredAtUtc":"2026-09-01T10:00:00+00:00","createdAtUtc":"2026-10-19T15:15:15.3988422+00:00"}
+
+T-03/InProgress HTTP 409 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.10","title":"Конфлікт інциденту","status":409,"detail":"Інцидент із таким заголовком уже існує та ще не закритий.","traceId":"00-3dd299ca96c4ec46571a119008f2a6c3-e3c6b36982248e12-00"}
+
+T-03/New HTTP 409 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.10","title":"Конфлікт інциденту","status":409,"detail":"Інцидент із таким заголовком уже існує та ще не закритий.","traceId":"00-eca83357897c2bebfe0cd3d83fb95a4b-b4dc285c63d45710-00"}
+
+T-03/Resolved HTTP 409 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.10","title":"Конфлікт інциденту","status":409,"detail":"Інцидент із таким заголовком уже існує та ще не закритий.","traceId":"00-ae187ca6a93a1930612f992a8aa7c610-02bf6f5a2cadead8-00"}
+
+T-03/Triaged HTTP 409 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.10","title":"Конфлікт інциденту","status":409,"detail":"Інцидент із таким заголовком уже існує та ще не закритий.","traceId":"00-0f48a9a5d3c62c9c445f8c844930105e-747283342406ba78-00"}

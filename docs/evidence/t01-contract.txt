@@ -1,0 +1,5 @@
+Extracted from passed integration tests. Times: 2026-10-19T18:15:11.6960610+03:00 -> 2026-10-19T18:15:15.6871492+03:00
+
+T-01/limits HTTP 201; title.Length=160; description.Length=4000; date=UTC now+4min
+
+T-01/CP-01 HTTP 201 application/json {"id":"9c8c86e4-f7c4-4909-8eb4-aa3a1cf33173","title":"Lr02-aca82fabcd1b4c39b1311e6ecf5c2ca2","description":"Lr02-aca82fabcd1b4c39b1311e6ecf5c2ca2 description","severity":"Low","status":"New","occurredAtUtc":"2026-09-01T10:00:00+00:00","createdAtUtc":"2026-10-19T15:15:15.4460001+00:00"}; Location=/api/incidents/9c8c86e4-f7c4-4909-8eb4-aa3a1cf33173; GET ownerDisplayName=Аліса Коваль; server fields verified in DB

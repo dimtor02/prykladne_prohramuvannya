@@ -1,0 +1,27 @@
+Extracted from passed integration tests. Times: 2026-10-19T18:15:11.6960610+03:00 -> 2026-10-19T18:15:15.6871492+03:00
+
+T-02/blank-description HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"description":["Опис є обов'язковим."]},"traceId":"00-5ab73fbcdae17eca71600df86842ca3f-107a91e8d5f56483-00"}
+
+T-02/blank-title HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"title":["Заголовок є обов'язковим."]},"traceId":"00-44a226ca3e00b00d3f66392a4d005e7e-e2ca1e4996c9659b-00"}
+
+T-02/description-length-before-trim HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"description":["Опис має містити не більше 4000 символів до обрізання пробілів."]},"traceId":"00-b871a84d8cab48cf00f49456cf88ab16-eb15a8ea3d22981e-00"}
+
+T-02/future-date HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"occurredAtUtc":["Час інциденту не може випереджати час сервера більш ніж на 5 хвилин."]},"traceId":"00-9db4bcdf0496536fa771f2e471a3af1b-3b4b58f0c09ab259-00"}
+
+T-02/long-description HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"description":["Опис має містити не більше 4000 символів до обрізання пробілів."]},"traceId":"00-89c551a4be79568f7a8fad2ae49f247a-d5967bba43600edc-00"}
+
+T-02/long-title HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"title":["Заголовок має містити не більше 160 символів до обрізання пробілів."]},"traceId":"00-b2c16a725c490d12c065fcf06d64af0b-989516c08b93137f-00"}
+
+T-02/missing-date HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"occurredAtUtc":["Час інциденту є обов'язковим."]},"traceId":"00-88dc264eb0ef351a68ebd1eeb652fd40-936bfafca008e4a9-00"}
+
+T-02/missing-description HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"description":["Опис є обов'язковим."]},"traceId":"00-3435b8f8b761afe26391d75a788670fe-916883e1c6c346cd-00"}
+
+T-02/missing-severity HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"severity":["Допустимі значення: Low, Medium, High, Critical."]},"traceId":"00-4d5999c8de854377354883447418faaf-aff1600c5c597e4f-00"}
+
+T-02/missing-title HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"title":["Заголовок є обов'язковим."]},"traceId":"00-5e8e7876e945edf2e6fa696d6a3f6e46-fd8533b8e9d7a801-00"}
+
+T-02/numeric-severity HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"severity":["Допустимі значення: Low, Medium, High, Critical."]},"traceId":"00-d4f4477b476c9c337457c018d76a605d-c3f732e0967c697f-00"}
+
+T-02/title-length-before-trim HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"title":["Заголовок має містити не більше 160 символів до обрізання пробілів."]},"traceId":"00-974a4af966d12246c628c52f9014d261-e15ba482a6346155-00"}
+
+T-02/unknown-severity HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"severity":["Допустимі значення: Low, Medium, High, Critical."]},"traceId":"00-a5d2a68d9d72adfd4424ac47d672b287-e208882ca320c2ed-00"}
