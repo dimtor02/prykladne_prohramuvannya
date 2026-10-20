@@ -5,3 +5,5 @@ public sealed record CreateIncidentRequest(
     string? Description,
     string? Severity,
     DateTimeOffset? OccurredAtUtc);
+
+public sealed record UpdateIncidentRequest(string? Title, string? Description);
