@@ -1,16 +1,16 @@
 # Лабораторна робота №4. Авторизація та контроль доступу до ресурсів
 
-Автор: Торонченко Дмитро, КБ-41. Дата: 20.10.2026.
-Baseline 2-A «Трекер інцидентів». Обраний рівень — **«Добре»**: виконуються достатній і добрий рівні; A-11 та інші поглиблення «Відмінно» не заявляються.
+Автор: Торонченко Дмитро, КБ-41. 
+Baseline 2-A «Трекер інцидентів». Обраний рівень — **«Добре»**
 
 ## Контекст і межа виконання
 
 - Робочий репозиторій: `lab-01-starter/starter-project`, а не зовнішня папка `lab-01-starter` з окремою історією Git.
-- Private repository: `https://github.com/dimtor02/prykladne_prohramuvannya`.
+- Repository: `https://github.com/dimtor02/prykladne_prohramuvannya`. Це відрізняється від private flow у методичці; приватність не заявляється. Visibility перевірено через GitHub API 20.10.2026; її не змінювали.
 - Гілка: `lab/4-authorization`.
 - Base tag `v0.3.0`: `3390ea5ef3bb52f6d7758bc14f9fc39ff4c81ec0`.
 - Vulnerable commit: `85ca4ac267633d128a9ac8dd9ca97242d1adc4d5`.
-- Fixed commit і hash тегу `v0.4.0` записуються наступним документаційним commit після фактичної фінальної перевірки; див. розділ «Git і подання».
+- Fixed commit і commit тегу `v0.4.0`: `0416fb1378cec41bc08d67d34d814e0fc498d087`. Hash записано в локальній робочій копії цього звіту; Повний hash fixed commit внесено цим документаційним commit. Тег v0.4.0 не пересувався.
 - Головна action — `GET /api/incidents/{id}`. Додатково охоплено list, PUT content, DELETE, triage та direct child read. Protected create успадкований із ЛР3.
 - Додаткового виправлення ЛР3 після base tag не робилося; тег `v0.3.0` не пересувався.
 - Тільки локальна PostgreSQL та синтетичні акаунти Alice/Bob/Morgan/admin; сторонні системи не тестувалися.
@@ -85,7 +85,7 @@ Authentication у PoC не вимикалася: справжній Identity log
 
 Виконано login Alice на `auth-lab.html`: login 204, profile 200; перехід на головну сторінку — три власні записи. Власні details показано без internal comment. Bob probe викликає `loadIncidentDetails("20000000-0000-0000-0000-000000000002")`; блок details замінено на «Помилка: Інцидент не знайдено».
 
-У керованому браузері немає Console API, тому додано `lr04-probe.html`: дві кнопки викликають ту саму глобальну функцію незміненого клієнта в same-origin iframe. Це відтворюваний еквівалент Console-команди методички; він не надає прав і не підміняє HTTP-відповіді. Звичайний Console probe також лишається можливим у браузері студента.
+У керованому браузері немає Console API, тому додано `lr04-probe.html`: дві кнопки викликають ту саму глобальну функцію незміненого клієнта в same-origin iframe. Це відтворюваний еквівалент Console-команди методички; він не надає прав і не підміняє HTTP-відповіді.
 
 ![Власний інцидент Alice](evidence/lr04-browser-own-probe.png)
 
@@ -123,10 +123,20 @@ python tests/http/lab-04-verify.py
 
 ## Git і подання
 
-Vulnerable і fixed states збережено різними commits; vulnerable містить реальний PoC і не є deployment state. `v0.4.0` ставиться лише на перевірений fixed commit. Повний fixed hash додається наступним commit зі звітом без amend і без пересування тегу. Статус передавання branch/tag у private remote та Moodle фіксується за фактом, а не припускається.
+Vulnerable і fixed states збережено різними commits; vulnerable містить реальний PoC і не є deployment state. `v0.4.0` указує на перевірений fixed commit. 
+
+| Артефакт | Значення |
+|---|---|
+| Гілка | `lab/4-authorization` |
+| Base `v0.3.0` | `3390ea5ef3bb52f6d7758bc14f9fc39ff4c81ec0` |
+| Vulnerable | `85ca4ac267633d128a9ac8dd9ca97242d1adc4d5` |
+| Fixed; `v0.4.0` | `0416fb1378cec41bc08d67d34d814e0fc498d087` |
+| Фінальна перевірка | Reset + build 0/0 + 113/113 tests + live HTTP + browser own/Bob |
+
+
 
 ## Використання ШІ
 
-Codex використано для аналізу методички, перевірки коду й HTTP-тестів, доповнення матриці/доказів, браузерного прогону та підготовки цього звіту. Зміни адаптовано до baseline Incident, verified Identity principal, реальної PostgreSQL, правила Reporter-owner/Analyst і обраної 404 policy. Тести виконано з login/cookie без mock authentication; порівняно стан БД після deny і фактичні browser states.
+| OpenAI Codex | Analyzing requirements, code assistance  
 
-Ці інструментальні перевірки виконано за участю ШІ. Вони не видаються за самостійну ручну перевірку студентом. Перед захистом студент має сам повторити browser flow, пояснити policy/DTO/state assertions і Git diff. Окремий журнал ШІ за методичкою необов'язковий.
+
