@@ -257,6 +257,7 @@ public sealed class IncidentCreationTests(ITestOutputHelper output) : IAsyncLife
         using var response = await client.GetAsync($"/api/incidents/{Guid.NewGuid()}");
         using var problem = await ReadProblemAsync(response, HttpStatusCode.NotFound, "T-06");
         Assert.Equal("Інцидент не знайдено", problem.RootElement.GetProperty("title").GetString());
-        Assert.False(string.IsNullOrWhiteSpace(problem.RootElement.GetProperty("detail").GetString()));
+        // LR4 uses one generic problem for unknown and inaccessible ids.
+        Assert.False(problem.RootElement.TryGetProperty("detail", out _));
     }
 }

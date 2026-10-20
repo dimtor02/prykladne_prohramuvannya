@@ -25,6 +25,7 @@ Login Alice/Bob/Morgan використовує справжню Identity cookie
 Першопричина mutation/triage: RequireAuthorization підтверджує тільки вхід;
 після пошуку за id код одразу змінює entity й викликає SaveChanges без owner/role check.
 
-Vulnerable commit hash записує автор після власного commit; агент Git не виконує.
+Vulnerable commit: `85ca4ac267633d128a9ac8dd9ca97242d1adc4d5`.
+Hash перевірено в робочому Git-репозиторії `starter-project`; зовнішній `lab-01-starter/.git` є іншим репозиторієм і не є історією цієї роботи.
 TRX з повним результатом збережено поза репозиторієм у tmp/lr04-tests/lr04-vulnerable.trx.
 Пароль, cookie та повне тіло login до доказу не включено.

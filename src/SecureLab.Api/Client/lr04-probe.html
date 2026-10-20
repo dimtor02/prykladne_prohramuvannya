@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ЛР4 — перевірка доступу</title>
+  <style>
+    body { margin: 0; font: 16px system-ui, sans-serif; background: #edf1f7; color: #172438; }
+    nav { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px 16px; }
+    button, a { font: inherit; padding: 8px 12px; }
+    iframe { width: 100%; height: calc(100vh - 90px); min-height: 850px; border: 0; }
+  </style>
+</head>
+<body>
+  <nav aria-label="Навчальна перевірка ЛР4">
+    <strong>ЛР4 · Alice</strong>
+    <a href="/auth-lab.html">Увійти / вийти</a>
+    <button type="button" id="own">Власний інцидент Alice</button>
+    <button type="button" id="foreign">Інцидент Bob</button>
+  </nav>
+  <iframe src="/" title="Наданий клієнт трекера інцидентів" id="tracker"></iframe>
+  <script>
+    // Equivalent to the methodical guide's Console probe. The server still decides access.
+    const tracker = document.querySelector('#tracker');
+    document.querySelector('#own').addEventListener('click', () =>
+      tracker.contentWindow.loadIncidentDetails('20000000-0000-0000-0000-000000000001'));
+    document.querySelector('#foreign').addEventListener('click', () =>
+      tracker.contentWindow.loadIncidentDetails('20000000-0000-0000-0000-000000000002'));
+  </script>
+</body>
+</html>

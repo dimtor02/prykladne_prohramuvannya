@@ -1,11 +1,13 @@
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using SecureLab.Api.Data;
 using SecureLab.Api.Data.Entities;
 using SecureLab.Api.Presentation.Contracts;
 
 namespace SecureLab.Api.Application.Incidents;
 
-public sealed class IncidentQueries(SecureLabDbContext dbContext, ILogger<IncidentQueries> logger)
+public sealed class IncidentQueries(SecureLabDbContext dbContext, ILogger<IncidentQueries> logger,
+    IncidentAccessPolicy access)
 {
     public async Task<IReadOnlyList<IncidentSearchResponse>> SearchAsync(
         string? q,
@@ -70,11 +72,12 @@ public sealed class IncidentQueries(SecureLabDbContext dbContext, ILogger<Incide
 
     public async Task<IReadOnlyList<IncidentListItemResponse>> GetListAsync(
         IncidentStatus? status,
+        ClaimsPrincipal user,
         CancellationToken cancellationToken)
     {
         logger.LogInformation("Loading incidents with status filter {Status}", status);
 
-        var query = dbContext.Incidents.AsNoTracking();
+        var query = access.ScopeRead(dbContext.Incidents.AsNoTracking(), user);
         if (status is not null)
         {
             query = query.Where(incident => incident.Status == status);
@@ -92,12 +95,13 @@ public sealed class IncidentQueries(SecureLabDbContext dbContext, ILogger<Incide
             .ToListAsync(cancellationToken);
     }
 
-    public Task<IncidentDetailsResponse?> GetDetailsAsync(Guid id, CancellationToken cancellationToken)
+    public Task<IncidentDetailsResponse?> GetDetailsAsync(Guid id, ClaimsPrincipal user,
+        CancellationToken cancellationToken)
     {
         logger.LogInformation("Loading incident {IncidentId}", id);
 
-        return dbContext.Incidents
-            .AsNoTracking()
+        var includeInternal = IncidentAccessPolicy.IsAnalyst(user);
+        return access.ScopeRead(dbContext.Incidents.AsNoTracking(), user)
             .Where(incident => incident.Id == id)
             .Select(incident => new IncidentDetailsResponse(
                 incident.Id,
@@ -109,7 +113,7 @@ public sealed class IncidentQueries(SecureLabDbContext dbContext, ILogger<Incide
                 incident.CreatedAtUtc,
                 incident.Owner.DisplayName,
                 incident.Comments
-                    .Where(comment => !comment.IsInternal)
+                    .Where(comment => !comment.IsInternal || includeInternal)
                     .OrderBy(comment => comment.CreatedAtUtc)
                     .Select(comment => new IncidentCommentResponse(
                         comment.Id,

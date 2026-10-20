@@ -1,0 +1,36 @@
+@host = http://localhost:5080
+@aliceIncident = 20000000-0000-0000-0000-000000000001
+@bobIncident = 20000000-0000-0000-0000-000000000002
+@unknownIncident = ffffffff-ffff-ffff-ffff-ffffffffffff
+
+# Login on auth-lab.html for browser flow. For an HTTP client, login separately
+# with a locally supplied password and retain its cookie; do not paste it into Git.
+# Automatic real-cookie scenarios are in AuthorizationSecurityTests.
+
+### A-02: authenticated Alice -> own details: 200
+GET {{host}}/api/incidents/{{aliceIncident}}
+Accept: application/json
+
+### A-03: same Alice -> Bob details: 404
+GET {{host}}/api/incidents/{{bobIncident}}
+Accept: application/json
+
+### A-10: same Alice -> unknown: identical 404 after excluding traceId/requestId
+GET {{host}}/api/incidents/{{unknownIncident}}
+Accept: application/json
+
+### A-05: Alice -> exactly own incidents
+GET {{host}}/api/incidents
+Accept: application/json
+
+### A-12: Alice -> Bob child comment-2: 404
+GET {{host}}/api/incident-comments/30000000-0000-0000-0000-000000000002
+Accept: application/json
+
+### A-12: Alice -> internal comment-3 in own parent: 404
+GET {{host}}/api/incident-comments/30000000-0000-0000-0000-000000000003
+Accept: application/json
+
+### A-03R: after login as Morgan -> Alice details: 200
+GET {{host}}/api/incidents/{{aliceIncident}}
+Accept: application/json
