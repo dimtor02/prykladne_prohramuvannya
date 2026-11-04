@@ -1,0 +1,25 @@
+Local Development verification, 2026-10-19.
+This file summarizes the observed command output; full SQL logs are omitted.
+
+1. dotnet run --project src/SecureLab.Api -c Release --no-build --no-restore -- --reset-database
+Exit code: 0.
+Observed: no migrations were applied; the database was already up to date.
+Observed: local study data cleared and seeded again.
+No custom ConnectionStrings__SecureLab environment override was set.
+
+2. dotnet build SecureLab.sln -c Release --no-restore
+Exit code: 0.
+Build succeeded. Warnings: 0. Errors: 0. Elapsed: 00:00:01.71.
+
+3. dotnet test tests/SecureLab.Api.Tests -c Release --no-build --no-restore
+Exit code: 0.
+Passed: 54. Failed: 0. Skipped: 0.
+The run also used console and TRX loggers; the sanitized per-test summary is final-tests.md.
+
+4. HTTP retest on the fixed API
+USB: 200, 1 result.
+No-match: 200, [].
+Original read-only control: 200, [].
+O'Brien: 200, 1 result.
+Ukrainian word with apostrophe U+0027: 200, 1 result.
+Exact timestamps, identifiers and JSON responses: search-after.json.

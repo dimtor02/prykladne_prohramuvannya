@@ -9,7 +9,8 @@ public static class IncidentEndpoints
     public static IEndpointRouteBuilder MapIncidentEndpoints(this IEndpointRouteBuilder endpoints)
     {
         var group = endpoints.MapGroup("/api/incidents")
-            .WithTags("Incidents");
+            .WithTags("Incidents")
+            .RequireAuthorization();
 
         group.MapGet("/", GetListAsync)
             .WithName("GetIncidents")
@@ -21,18 +22,44 @@ public static class IncidentEndpoints
             .Produces<IncidentDetailsResponse>()
             .ProducesProblem(StatusCodes.Status404NotFound);
 
-        group.MapGet("/severity-summary", () => Results.Problem(
-                title: "Точку розширення ще не реалізовано",
-                detail: "Завершіть цей endpoint під час лабораторної роботи № 1.",
-                statusCode: StatusCodes.Status501NotImplemented))
+        group.MapGet("/severity-summary", GetSeveritySummaryAsync)
             .WithName("GetIncidentSeveritySummary")
-            .ProducesProblem(StatusCodes.Status501NotImplemented);
+            .Produces<IReadOnlyList<IncidentSeveritySummaryResponse>>()
+            .ProducesValidationProblem();
 
         return endpoints;
     }
 
+    private static async Task<IResult> GetSeveritySummaryAsync(
+        string? status,
+        IncidentQueries queries,
+        CancellationToken cancellationToken)
+    {
+        // Explicit names only: numeric enum representations are not part of the API contract.
+        IncidentStatus? parsedStatus = status switch
+        {
+            null => null,
+            "New" => IncidentStatus.New,
+            "Triaged" => IncidentStatus.Triaged,
+            "InProgress" => IncidentStatus.InProgress,
+            "Resolved" => IncidentStatus.Resolved,
+            "Closed" => IncidentStatus.Closed,
+            _ => null
+        };
+        if (status is not null && parsedStatus is null)
+        {
+            return Results.ValidationProblem(new Dictionary<string, string[]>
+            {
+                ["status"] = ["Допустимі значення: New, Triaged, InProgress, Resolved, Closed."]
+            });
+        }
+
+        return Results.Ok(await queries.GetSeveritySummaryAsync(parsedStatus, cancellationToken));
+    }
+
     private static async Task<IResult> GetListAsync(
         string? status,
+        HttpContext context,
         IncidentQueries queries,
         CancellationToken cancellationToken)
     {
@@ -51,20 +78,18 @@ public static class IncidentEndpoints
             parsedStatus = candidate;
         }
 
-        return Results.Ok(await queries.GetListAsync(parsedStatus, cancellationToken));
+        return Results.Ok(await queries.GetListAsync(parsedStatus, context.User, cancellationToken));
     }
 
     private static async Task<IResult> GetDetailsAsync(
         Guid id,
+        HttpContext context,
         IncidentQueries queries,
         CancellationToken cancellationToken)
     {
-        var incident = await queries.GetDetailsAsync(id, cancellationToken);
+        var incident = await queries.GetDetailsAsync(id, context.User, cancellationToken);
         return incident is null
-            ? Results.Problem(
-                title: "Інцидент не знайдено",
-                detail: $"Інцидент '{id}' не існує.",
-                statusCode: StatusCodes.Status404NotFound)
+            ? IncidentAccessResults.Denied(IncidentAccess.Hidden, context)
             : Results.Ok(incident);
     }
 }

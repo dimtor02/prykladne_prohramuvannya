@@ -1,0 +1,7 @@
+Extracted from passed integration tests. Times: 2026-10-19T20:50:52.5720995+03:00 -> 2026-10-19T20:50:56.1261819+03:00
+
+T-05/  HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"sortBy":["Допустимі значення: createdAtUtc, severity, status."]},"traceId":"00-1e75a9f1297a468d3c22cae37b91cea0-c26fe84f88658215-00"}
+
+T-05/Severity HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"sortBy":["Допустимі значення: createdAtUtc, severity, status."]},"traceId":"00-d32602eeb1d7845d2c32671dc4097f73-26a36febd6f1c0e1-00"}
+
+T-05/price HTTP 400 application/problem+json {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"sortBy":["Допустимі значення: createdAtUtc, severity, status."]},"traceId":"00-0e9841fae751c4c367f984ef19b76d0d-9b7a06f00cdc6d97-00"}

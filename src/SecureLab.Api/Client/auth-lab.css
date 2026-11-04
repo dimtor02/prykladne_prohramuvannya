@@ -1,0 +1,12 @@
+.auth-layout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+.session-panel { grid-column: 1 / -1; }
+.auth-form, .auth-form fieldset { display: grid; gap: 1rem; }
+.auth-form fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.auth-form label { display: grid; gap: .35rem; }
+.auth-form input, .auth-form select, .auth-form textarea { width: 100%; box-sizing: border-box; font: inherit; }
+.auth-form textarea { resize: vertical; padding: .65rem; }
+.auth-hint { margin: 0; color: #526175; font-size: .9rem; }
+.auth-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+#profile { white-space: pre-wrap; overflow-wrap: anywhere; }
+button:disabled { opacity: .6; cursor: default; }
+@media (max-width: 760px) { .auth-layout { grid-template-columns: 1fr; } }
