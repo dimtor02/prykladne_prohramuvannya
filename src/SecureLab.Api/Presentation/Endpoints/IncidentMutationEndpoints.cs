@@ -3,6 +3,7 @@ using SecureLab.Api.Application.Incidents;
 using SecureLab.Api.Data;
 using SecureLab.Api.Data.Entities;
 using SecureLab.Api.Presentation.Contracts;
+using SecureLab.Api.Security;
 
 namespace SecureLab.Api.Presentation.Endpoints;
 
@@ -12,11 +13,14 @@ public static class IncidentMutationEndpoints
     {
         var group = app.MapGroup("/api/incidents").RequireAuthorization().WithTags("Incidents");
         group.MapPut("/{id:guid}", UpdateAsync)
+            .AddEndpointFilter<AntiforgeryFilter>()
             .WithName("UpdateIncidentContent").Produces(204).ProducesValidationProblem()
             .ProducesProblem(403).ProducesProblem(404).ProducesProblem(409);
         group.MapDelete("/{id:guid}", DeleteAsync)
+            .AddEndpointFilter<AntiforgeryFilter>()
             .WithName("DeleteIncident").Produces(204).ProducesProblem(403).ProducesProblem(404);
         group.MapPost("/{id:guid}/triage", TriageAsync)
+            .AddEndpointFilter<AntiforgeryFilter>()
             .WithName("TriageIncident").Produces(204)
             .ProducesProblem(403).ProducesProblem(404).ProducesProblem(409);
         app.MapGet("/api/incident-comments/{id:guid}", GetCommentAsync)
@@ -86,6 +90,7 @@ public static class IncidentMutationEndpoints
             Note = "Первинну оцінку завершено аналітиком.", CreatedAtUtc = now
         });
         await db.SaveChangesAsync(ct);
+        access.AuditSucceededTriage(context, id);
         return Results.NoContent();
     }
 

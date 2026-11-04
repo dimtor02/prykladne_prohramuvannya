@@ -125,6 +125,7 @@ public sealed class AuthorizationSecurityTests(ITestOutputHelper output) : IAsyn
     public async Task A04_NonOwnerMutation_Returns404_AndLeavesWholeResourceUnchanged(string method)
     {
         using var alice = await factory.LoginSeedAsync("alice");
+        await alice.UseAntiforgeryTokenAsync();
         var before = await Snapshot(DbSeeder.BobIncidentId);
         var path = $"/api/incidents/{DbSeeder.BobIncidentId}" + (method == "POST" ? "/triage" : "");
         using var request = new HttpRequestMessage(new HttpMethod(method), path);
@@ -161,6 +162,7 @@ public sealed class AuthorizationSecurityTests(ITestOutputHelper output) : IAsyn
     public async Task A06_ReporterTriage_Returns403Forbidden_AndDoesNotChangeStatus()
     {
         using var alice = await factory.LoginSeedAsync("alice");
+        await alice.UseAntiforgeryTokenAsync();
         var before = await Snapshot(DbSeeder.SafeTextIncidentId);
         using var response = await alice.PostAsJsonAsync($"/api/incidents/{DbSeeder.SafeTextIncidentId}/triage",
             new { role = "Analyst", status = "Triaged", isTransitionAllowed = true });
@@ -174,7 +176,9 @@ public sealed class AuthorizationSecurityTests(ITestOutputHelper output) : IAsyn
     public async Task A07_AnalystCanOnlyTriageNew_AndHistoryUsesVerifiedActor()
     {
         using var alice = await factory.LoginSeedAsync("alice");
+        await alice.UseAntiforgeryTokenAsync();
         using var morgan = await factory.LoginSeedAsync("morgan");
+        await morgan.UseAntiforgeryTokenAsync();
         var item = await Create(alice);
         try
         {
@@ -206,6 +210,7 @@ public sealed class AuthorizationSecurityTests(ITestOutputHelper output) : IAsyn
     public async Task A08a_OwnerCanUpdateContent_ButForgedOwnerRoleStatusSeverityAreIgnored()
     {
         using var alice = await factory.LoginSeedAsync("alice");
+        await alice.UseAntiforgeryTokenAsync();
         var item = await Create(alice);
         try
         {
@@ -243,6 +248,7 @@ public sealed class AuthorizationSecurityTests(ITestOutputHelper output) : IAsyn
     public async Task OwnerCanDeleteOwnFixture_AndChildrenCascade()
     {
         using var alice = await factory.LoginSeedAsync("alice");
+        await alice.UseAntiforgeryTokenAsync();
         var item = await Create(alice);
         try
         {
@@ -272,6 +278,7 @@ public sealed class AuthorizationSecurityTests(ITestOutputHelper output) : IAsyn
     public async Task AnalystReadPermissionDoesNotGrantContentMutation(string method)
     {
         using var morgan = await factory.LoginSeedAsync("morgan");
+        await morgan.UseAntiforgeryTokenAsync();
         var before = await Snapshot(DbSeeder.AliceIncidentId);
         using var request = new HttpRequestMessage(new HttpMethod(method), $"/api/incidents/{DbSeeder.AliceIncidentId}");
         if (method == "PUT") request.Content = JsonContent.Create(new { title = "forged", description = "forged" });
@@ -289,6 +296,7 @@ public sealed class AuthorizationSecurityTests(ITestOutputHelper output) : IAsyn
     public async Task A10_ForeignAndUnknownIds_HaveIdentical404Responses(string method)
     {
         using var alice = await factory.LoginSeedAsync("alice");
+        await alice.UseAntiforgeryTokenAsync();
         var foreignId = method == "CHILD" ? BobComment : DbSeeder.BobIncidentId;
         var unknownId = Guid.Parse("ffffffff-ffff-ffff-ffff-ffffffffffff");
         async Task<(JsonObject Body, string? ContentType)> Send(Guid id)
@@ -338,6 +346,7 @@ public sealed class AuthorizationSecurityTests(ITestOutputHelper output) : IAsyn
         using var provider = new AuditProvider();
         await using var host = factory.WithWebHostBuilder(builder => builder.ConfigureLogging(logs => logs.AddProvider(provider)));
         using var alice = await host.LoginSeedAsync("alice");
+        await alice.UseAntiforgeryTokenAsync();
         using var response = await alice.PostAsJsonAsync($"/api/incidents/{DbSeeder.SafeTextIncidentId}/triage",
             new { password = "do-not-log-this-synthetic-body", role = "Analyst" });
         var problem = await Problem(response, HttpStatusCode.Forbidden);

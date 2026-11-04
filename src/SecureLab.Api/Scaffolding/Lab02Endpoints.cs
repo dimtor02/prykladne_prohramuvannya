@@ -4,6 +4,7 @@ using SecureLab.Api.Application.Incidents;
 using SecureLab.Api.Data;
 using SecureLab.Api.Data.Entities;
 using SecureLab.Api.Presentation.Contracts;
+using SecureLab.Api.Security;
 
 namespace SecureLab.Api.Scaffolding;
 
@@ -13,11 +14,13 @@ public static class Lab02Endpoints
     public static void MapLab02Endpoints(this WebApplication app)
     {
         app.MapGet("/api/incidents/search", SearchIncidentsAsync)
+            .RequireRateLimiting(SearchRateLimitPolicy.Name)
             .WithName("SearchIncidents")
             .Produces<IReadOnlyList<IncidentSearchResponse>>()
             .ProducesValidationProblem();
         app.MapPost("/api/incidents", CreateIncidentAsync)
             .RequireAuthorization()
+            .AddEndpointFilter<AntiforgeryFilter>()
             .WithName("CreateIncident")
             .Produces<CreatedIncidentResponse>(StatusCodes.Status201Created)
             .ProducesValidationProblem()

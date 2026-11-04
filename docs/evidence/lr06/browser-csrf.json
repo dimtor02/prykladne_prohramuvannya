@@ -1,0 +1,109 @@
+{
+  "utc": "2026-11-04T18:52:32.329Z",
+  "browser": "156.0.8078.80",
+  "cases": [
+    {
+      "name": "register-form-preserved",
+      "status": 201
+    },
+    {
+      "name": "auth-page-F5-create",
+      "status": 201,
+      "id": "e99be505-9c78-4e7f-a829-b32329a356ee"
+    },
+    {
+      "name": "REG-CSRF-01-browser",
+      "denied": 400,
+      "unchanged": true,
+      "allowed": 204,
+      "after": "Updated with standard antiforgery pair"
+    },
+    {
+      "name": "browser-page-create-after-navigation-F5",
+      "status": 201,
+      "id": "242820a9-8663-4b09-82e2-1da8cf047678"
+    },
+    {
+      "name": "logout-login-Bob-F5-new-token",
+      "create": 201,
+      "deleted": 204
+    }
+  ],
+  "mutations": [
+    {
+      "method": "POST",
+      "path": "/api/auth/register",
+      "tokenPresent": false
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "tokenPresent": false
+    },
+    {
+      "method": "POST",
+      "path": "/api/incidents",
+      "tokenPresent": true
+    },
+    {
+      "method": "PUT",
+      "path": "/api/incidents/e99be505-9c78-4e7f-a829-b32329a356ee",
+      "tokenPresent": false
+    },
+    {
+      "method": "PUT",
+      "path": "/api/incidents/e99be505-9c78-4e7f-a829-b32329a356ee",
+      "tokenPresent": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/incidents",
+      "tokenPresent": true
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/incidents/e99be505-9c78-4e7f-a829-b32329a356ee",
+      "tokenPresent": true
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/incidents/242820a9-8663-4b09-82e2-1da8cf047678",
+      "tokenPresent": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "tokenPresent": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "tokenPresent": false
+    },
+    {
+      "method": "POST",
+      "path": "/api/incidents",
+      "tokenPresent": true
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/incidents/3121cf65-78ef-427e-9bfd-0a8afd96a707",
+      "tokenPresent": true
+    }
+  ],
+  "cookieFlags": [
+    {
+      "name": "SecureLab.Antiforgery",
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Strict"
+    },
+    {
+      "name": ".AspNetCore.Identity.Application",
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "pageErrors": []
+}

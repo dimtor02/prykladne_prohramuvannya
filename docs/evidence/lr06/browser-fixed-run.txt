@@ -1,0 +1,4 @@
+UTC: 2026-11-04T18:51:12.169637+00:00
+Command: C:/Users/dimto/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe tests/browser/lab05-regression.cjs fixed
+Exit: 0
+{"stage":"fixed","browser":"156.0.8078.80","cases":[{"name":"seed-normal-flow","status":200,"marker":null},{"name":"normal-0","status":200,"marker":null},{"name":"normal-1","status":200,"marker":null},{"name":"normal-2","status":200,"marker":null},{"name":"normal-3","status":200,"marker":null},{"name":"normal-4","status":200,"marker":null},{"name":"description-alice","status":200,"marker":null},{"name":"comment-alice","status":200,"marker":null},{"name":"description-morgan","status":200,"marker":null},{"name":"comment-morgan","status":200,"marker":null},{"name":"description-bob","status":404,"marker":null}],"result":"PASS"}

@@ -1,0 +1,4 @@
+UTC: 2026-11-04T18:50:51.238201+00:00
+Command: C:\Users\dimto\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe tests/http/lab06-runtime.py
+Exit: 0
+PASS: Kestrel Production 500/headers/trace; profile recovery; Development audit/log review; OpenAPI perimeter.

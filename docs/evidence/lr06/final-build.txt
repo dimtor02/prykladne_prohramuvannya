@@ -1,0 +1,11 @@
+UTC: 2026-11-04T18:48:37.256433+00:00
+Command: dotnet build SecureLab.sln -c Release --no-restore -m:1 -nr:false -p:UseSharedCompilation=false
+Exit: 0
+  SecureLab.Api -> C:\Users\dimto\Desktop\uni_4_1\Прикладні технології програмування (лаб Бабенко Ю.М.)\lab-01-starter\starter-project\src\SecureLab.Api\bin\Release\net10.0\SecureLab.Api.dll
+  SecureLab.Api.Tests -> C:\Users\dimto\Desktop\uni_4_1\Прикладні технології програмування (лаб Бабенко Ю.М.)\lab-01-starter\starter-project\tests\SecureLab.Api.Tests\bin\Release\net10.0\SecureLab.Api.Tests.dll
+
+Сборка успешно завершена.
+    Предупреждений: 0
+    Ошибок: 0
+
+Прошло времени 00:00:07.93

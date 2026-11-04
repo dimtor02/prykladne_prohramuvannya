@@ -16,10 +16,13 @@ def client():
 
 
 def send(opener, path, method="GET", body=None):
+    headers = {"Accept": "application/json", "Content-Type": "application/json"}
+    if method in ("POST", "PUT", "PATCH", "DELETE") and path not in ("/api/auth/login", "/api/auth/register"):
+        headers["X-CSRF-TOKEN"] = opener.csrf_token
     request = urllib.request.Request(
         HOST + path, method=method,
         data=None if body is None else json.dumps(body).encode("utf-8"),
-        headers={"Accept": "application/json", "Content-Type": "application/json"},
+        headers=headers,
     )
     try:
         response = opener.open(request, timeout=15)
@@ -40,6 +43,9 @@ def main():
     assert send(anonymous, f"/api/incidents/{ALICE}")[0] == 401
     for user, opener in [("alice", alice), ("morgan", morgan)]:
         assert send(opener, "/api/auth/login", "POST", {"userName": user, "password": password})[0] == 204
+        token_response = send(opener, "/api/auth/csrf-token")
+        assert token_response[0] == 200
+        opener.csrf_token = token_response[1]["token"]
     own = send(alice, f"/api/incidents/{ALICE}")
     assert own[0] == 200 and own[1]["id"] == ALICE
     assert send(alice, f"/api/incidents/{BOB}")[0] == 404

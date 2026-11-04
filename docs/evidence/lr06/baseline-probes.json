@@ -1,0 +1,31 @@
+{
+  "reviewStart": "e8b62cf0665bbff5a6247a53db5751663a9c2e84",
+  "utc": "2026-11-04T18:37:17.596830+00:00",
+  "csrf": {
+    "createWithoutToken": 201,
+    "updateWithoutToken": 204,
+    "id": "f761b574-cc38-427e-8193-8de7ae6223b0",
+    "before": "Controlled local baseline record",
+    "after": "Changed without a CSRF token",
+    "stateChanged": true
+  },
+  "error": {
+    "status": 500,
+    "headers": {
+      "Connection": "close",
+      "Content-Type": "application/problem+json",
+      "Date": "Wed, 04 Nov 2026 18:37:24 GMT",
+      "Server": "Kestrel",
+      "Cache-Control": "no-cache,no-store",
+      "Expires": "-1",
+      "Pragma": "no-cache",
+      "Transfer-Encoding": "chunked"
+    },
+    "body": {
+      "type": "https://tools.ietf.org/html/rfc9110#section-15.6.1",
+      "title": "An error occurred while processing your request.",
+      "status": 500,
+      "traceId": "00-57fe8686ffe4d4a3cc92eca26f01bcb2-abe33cd64647f0ea-00"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+UTC: 2026-11-04T18:52:30.464345+00:00
+Command: C:\Users\dimto\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe tests/http/lab-04-verify.py
+Exit: 0
+LIVE PASS: health/root 200; anonymous 401; Alice own 200; foreign GET/PUT/DELETE 404;
+Reporter triage 403 unchanged; scoped list; Analyst read 200; parent/internal checks; equivalent 404.

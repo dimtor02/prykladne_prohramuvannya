@@ -1,0 +1,9 @@
+UTC: 2026-11-04T18:48:45.777030+00:00
+Command: dotnet test SecureLab.sln -c Release --no-build --no-restore --logger trx;LogFileName=lr06.trx
+Exit: 0
+Тестовый запуск для C:\Users\dimto\Desktop\uni_4_1\Прикладні технології програмування %28лаб Бабенко Ю.М.%29\lab-01-starter\starter-project\tests\SecureLab.Api.Tests\bin\Release\net10.0\SecureLab.Api.Tests.dll (.NETCoreApp,Version=v10.0)
+Общее количество тестовых файлов (1), соответствующих указанному шаблону.
+Внимание! Перезапись файла с результатами: C:\Users\dimto\Desktop\uni_4_1\Прикладні технології програмування (лаб Бабенко Ю.М.)\lab-01-starter\starter-project\tests\SecureLab.Api.Tests\TestResults\lr06.trx
+Файл результатов: C:\Users\dimto\Desktop\uni_4_1\Прикладні технології програмування (лаб Бабенко Ю.М.)\lab-01-starter\starter-project\tests\SecureLab.Api.Tests\TestResults\lr06.trx
+
+Пройден!   : не пройдено     0, пройдено   141, пропущено     0, всего   141, длительность 35 s. - SecureLab.Api.Tests.dll (net10.0)

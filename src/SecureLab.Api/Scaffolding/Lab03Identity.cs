@@ -8,6 +8,7 @@ using Npgsql;
 using SecureLab.Api.Data;
 using SecureLab.Api.Data.Entities;
 using SecureLab.Api.Presentation.Contracts;
+using SecureLab.Api.Security;
 
 namespace SecureLab.Api.Scaffolding;
 
@@ -96,7 +97,7 @@ public static class Lab03Identity
             await signIn.SignOutAsync();
             LogEvent(logs.CreateLogger(typeof(Lab03Identity).FullName!), context, "logout", "success", "anonymous");
             return Results.NoContent();
-        });
+        }).RequireAuthorization().AddEndpointFilter<AntiforgeryFilter>();
         app.MapGet("/api/me", async (HttpContext context, UserManager<ApplicationUser> users) =>
         {
             // The lookup key is the verified NameIdentifier claim, never a request header.

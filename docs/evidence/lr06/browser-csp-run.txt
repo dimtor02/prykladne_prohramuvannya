@@ -1,0 +1,4 @@
+UTC: 2026-11-04T18:51:24.277766+00:00
+Command: C:/Users/dimto/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe tests/browser/lab05-regression.cjs csp
+Exit: 0
+{"stage":"csp","browser":"156.0.8078.80","cases":[{"name":"/","status":200},{"name":"/auth-lab.html","status":200},{"name":"/browser-lab.html","status":200},{"name":"/lr04-probe.html","status":200},{"name":"image-blocked"},{"name":"cross-origin-embedding"}],"result":"PASS"}

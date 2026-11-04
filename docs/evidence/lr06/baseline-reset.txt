@@ -1,0 +1,4 @@
+UTC: 2026-11-04T18:36:32.534178+00:00
+Command: dotnet run --project src/SecureLab.Api -c Release --no-build --launch-profile http -- --reset-database
+Exit: 0
+Sanitized summary: local study reset and seed completed successfully; full EF diagnostic log retained outside repository.

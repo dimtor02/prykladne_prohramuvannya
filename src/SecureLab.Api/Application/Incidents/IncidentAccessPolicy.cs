@@ -55,4 +55,12 @@ public sealed class IncidentAccessPolicy(ILogger<IncidentAccessPolicy> logger)
             "authorization.denied", SubjectId(context.User), "incident.triage", resourceId,
             "denied", DateTimeOffset.UtcNow, TraceId(context));
     }
+
+    public void AuditSucceededTriage(HttpContext context, Guid resourceId)
+    {
+        logger.LogInformation(
+            "{EventName} subject={SubjectId} action={Action} resource={ResourceId} result={Result} occurredAtUtc={OccurredAtUtc:O} traceId={TraceId}",
+            "incident.transition", SubjectId(context.User), "incident.triage", resourceId,
+            "success", DateTimeOffset.UtcNow, TraceId(context));
+    }
 }

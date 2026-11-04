@@ -119,6 +119,7 @@ public sealed class AuthenticationSecurityTests(ITestOutputHelper output) : IAsy
     {
         var marker = "Lr03-" + Guid.NewGuid().ToString("N");
         using var client = await factory.LoginSeedAsync("bob");
+        await client.UseAntiforgeryTokenAsync();
         client.DefaultRequestHeaders.Add("X-Demo-UserId", DbSeeder.AliceId.ToString());
         var body = new Dictionary<string, object?>
         {
@@ -151,6 +152,7 @@ public sealed class AuthenticationSecurityTests(ITestOutputHelper output) : IAsy
     public async Task A06_LogoutDeletesMainCookie_AndSameClientLosesAccess()
     {
         using var client = await factory.LoginSeedAsync("alice");
+        await client.UseAntiforgeryTokenAsync();
         using var before = await client.GetAsync("/api/me");
         Assert.Equal(HttpStatusCode.OK, before.StatusCode);
         using var logout = await client.PostAsync("/api/auth/logout", null);
@@ -360,6 +362,7 @@ public sealed class AuthenticationSecurityTests(ITestOutputHelper output) : IAsy
         var wrongPassword = NewPassword();
         using var failed = await client.PostAsJsonAsync("/api/auth/login", new { userName = "alice", password = wrongPassword });
         using var success = await client.PostAsJsonAsync("/api/auth/login", new { userName = "alice", password = SeedPassword });
+        await client.UseAntiforgeryTokenAsync();
         using var logout = await client.PostAsync("/api/auth/logout", null);
         Assert.Equal(HttpStatusCode.Unauthorized, failed.StatusCode);
         Assert.Equal(HttpStatusCode.NoContent, success.StatusCode);

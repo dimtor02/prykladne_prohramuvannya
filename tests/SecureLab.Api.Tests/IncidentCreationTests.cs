@@ -84,6 +84,7 @@ public sealed class IncidentCreationTests(ITestOutputHelper output) : IAsyncLife
         try
         {
             using var client = await factory.LoginSeedAsync("alice");
+        await client.UseAntiforgeryTokenAsync();
             using var response = await client.PostAsJsonAsync("/api/incidents", body);
             using var problem = await ReadProblemAsync(response, HttpStatusCode.BadRequest, $"T-02/{scenario}");
             Assert.True(problem.RootElement.GetProperty("errors").TryGetProperty(field, out _));
@@ -110,6 +111,7 @@ public sealed class IncidentCreationTests(ITestOutputHelper output) : IAsyncLife
         try
         {
             using var client = await factory.LoginSeedAsync("alice");
+        await client.UseAntiforgeryTokenAsync();
             var before = DateTimeOffset.UtcNow;
             using var response = await client.PostAsJsonAsync("/api/incidents", body);
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
@@ -152,6 +154,7 @@ public sealed class IncidentCreationTests(ITestOutputHelper output) : IAsyncLife
         try
         {
             using var client = await factory.LoginSeedAsync("alice");
+        await client.UseAntiforgeryTokenAsync();
             using var first = await client.PostAsJsonAsync("/api/incidents", ValidBody(marker));
             Assert.Equal(HttpStatusCode.Created, first.StatusCode);
             await using var scope = factory.Services.CreateAsyncScope();
@@ -177,6 +180,7 @@ public sealed class IncidentCreationTests(ITestOutputHelper output) : IAsyncLife
         try
         {
             using var client = await factory.LoginSeedAsync("alice");
+        await client.UseAntiforgeryTokenAsync();
             using var first = await client.PostAsJsonAsync("/api/incidents", ValidBody(marker));
             Assert.Equal(HttpStatusCode.Created, first.StatusCode);
             if (closed)
@@ -210,6 +214,7 @@ public sealed class IncidentCreationTests(ITestOutputHelper output) : IAsyncLife
         try
         {
             using var client = await factory.LoginSeedAsync("alice");
+        await client.UseAntiforgeryTokenAsync();
             using var response = await client.PostAsJsonAsync("/api/incidents", body);
             if (valid)
             {
@@ -239,6 +244,7 @@ public sealed class IncidentCreationTests(ITestOutputHelper output) : IAsyncLife
         try
         {
             using var client = await factory.LoginSeedAsync("alice");
+        await client.UseAntiforgeryTokenAsync();
             using var response = await client.PostAsJsonAsync("/api/incidents", body);
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
             var created = await response.Content.ReadFromJsonAsync<CreatedIncidentResponse>();

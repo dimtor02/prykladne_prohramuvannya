@@ -1,0 +1,190 @@
+{
+  "utc": "2026-11-04T18:50:51.461955+00:00",
+  "profiles": {
+    "Production": {
+      "health": 200,
+      "scalar": "SPA fallback, not API reference",
+      "openapi": 404,
+      "teachingCors": "absent"
+    },
+    "Development": {
+      "health": 200,
+      "openapi": 200,
+      "normalLogin": 204
+    }
+  },
+  "observations": [
+    {
+      "case": "Production unexpected 500",
+      "status": 500,
+      "headers": {
+        "content-type": "application/problem+json",
+        "cache-control": "no-cache,no-store",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'"
+      },
+      "problem": {
+        "type": "https://tools.ietf.org/html/rfc9110#section-15.6.1",
+        "title": "An error occurred while processing your request.",
+        "status": 500,
+        "traceId": "00-647e02784e7b76d5fac551ca54795552-f640dcd3d103246d-00"
+      }
+    },
+    {
+      "case": "Production static",
+      "status": 200,
+      "headers": {
+        "content-type": "text/html",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'"
+      },
+      "problem": null
+    },
+    {
+      "case": "Production health-restored",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'"
+      },
+      "problem": null
+    },
+    {
+      "case": "Production scalar",
+      "status": 200,
+      "headers": {
+        "content-type": "text/html",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'"
+      },
+      "problem": null
+    },
+    {
+      "case": "Production openapi",
+      "status": 404,
+      "headers": {
+        "content-type": "application/problem+json",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'"
+      },
+      "problem": {
+        "type": "https://tools.ietf.org/html/rfc9110#section-15.5.5",
+        "title": "Not Found",
+        "status": 404,
+        "traceId": "00-74a4481f0a47daa5e902c7fd29af97c3-7a921a4597bb0e7c-00"
+      }
+    },
+    {
+      "case": "Development token (value omitted)",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "no-cache, no-store",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'"
+      },
+      "problem": null
+    },
+    {
+      "case": "Development domain validation",
+      "status": 400,
+      "headers": {
+        "content-type": "application/problem+json",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'"
+      },
+      "problem": {
+        "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+        "title": "One or more validation errors occurred.",
+        "status": 400,
+        "errors": {
+          "title": [
+            "Заголовок є обов'язковим."
+          ],
+          "description": [
+            "Опис є обов'язковим."
+          ],
+          "severity": [
+            "Допустимі значення: Low, Medium, High, Critical."
+          ],
+          "occurredAtUtc": [
+            "Час інциденту є обов'язковим."
+          ]
+        },
+        "traceId": "00-e825fe4ed402897a0665880fa024f1b1-fca4b75aabdb9a8b-00"
+      }
+    },
+    {
+      "case": "Reporter triage denied; unchanged",
+      "status": 403,
+      "headers": {
+        "content-type": "application/problem+json",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'"
+      },
+      "problem": {
+        "type": "https://tools.ietf.org/html/rfc9110#section-15.5.4",
+        "title": "Forbidden",
+        "status": 403,
+        "traceId": "00-d1f09405ec71b5d882ba4ae4ca108903-e84b27b2b9d89730-00"
+      }
+    }
+  ],
+  "errorCorrelation": {
+    "responseTraceId": "00-647e02784e7b76d5fac551ca54795552-f640dcd3d103246d-00",
+    "logTraceId": "647e02784e7b76d5fac551ca54795552",
+    "excerpt": [
+      "fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[1]",
+      "      => SpanId:f640dcd3d103246d, TraceId:647e02784e7b76d5fac551ca54795552, ParentId:0000000000000000 => ConnectionId:0HNPQKI6V1BD1 => RequestPath:/api/auth/login RequestId:0HNPQKI6V1BD1:00000001",
+      "      An unhandled exception has occurred while executing the request."
+    ]
+  },
+  "audit": {
+    "resource": "0446222d-e46f-4a48-80a4-167342cd1fc0",
+    "deniedStatus": 403,
+    "deniedStateUnchanged": true,
+    "allowedStatus": 204,
+    "oldStatus": "New",
+    "newStatus": "Triaged"
+  },
+  "openapiMutations": [
+    "DELETE /api/incidents/{id}",
+    "POST /api/auth/login",
+    "POST /api/auth/logout",
+    "POST /api/auth/register",
+    "POST /api/incidents",
+    "POST /api/incidents/{id}/triage",
+    "PUT /api/incidents/{id}"
+  ],
+  "logReview": {
+    "scenarios": [
+      "successful login",
+      "failed login",
+      "denied action",
+      "validation error",
+      "unexpected error",
+      "privileged transition"
+    ],
+    "sink": "three local Kestrel console logs, unredacted originals checked outside repository",
+    "sensitiveValueMatches": {
+      "seedPassword": 0,
+      "wrongPassword": 0,
+      "issuedTokens": 0,
+      "cookieHeaders": 0,
+      "csrfHeader": 0
+    },
+    "auditExcerpt": [
+      "authorization.denied subject=10000000-0000-0000-0000-000000000001 action=incident.triage resource=0446222d-e46f-4a48-80a4-167342cd1fc0 result=denied occurredAtUtc=2026-11-04T18:51:05.3741349+00:00 traceId=00-d1f09405ec71b5d882ba4ae4ca108903-e84b27b2b9d89730-00",
+      "incident.transition subject=10000000-0000-0000-0000-000000000003 action=incident.triage resource=0446222d-e46f-4a48-80a4-167342cd1fc0 result=success occurredAtUtc=2026-11-04T18:51:05.5467000+00:00 traceId=00-7920ccc9384a30a3bd8a51ee76a5a8d8-13729b1fa045d765-00"
+    ]
+  }
+}

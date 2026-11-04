@@ -1,0 +1,6 @@
+UTC: 2026-11-04T18:36:20.922421+00:00
+Command: dotnet restore SecureLab.sln --locked-mode
+Exit: 0
+  Определение проектов для восстановления...
+  Восстановлен C:\Users\dimto\Desktop\uni_4_1\Прикладні технології програмування (лаб Бабенко Ю.М.)\lab-01-starter\starter-project\tests\SecureLab.Api.Tests\SecureLab.Api.Tests.csproj (за 613 мс).
+  Восстановлен C:\Users\dimto\Desktop\uni_4_1\Прикладні технології програмування (лаб Бабенко Ю.М.)\lab-01-starter\starter-project\src\SecureLab.Api\SecureLab.Api.csproj (за 613 мс).
