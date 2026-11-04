@@ -1,0 +1,81 @@
+{
+  "stage": "csp",
+  "browser": "156.0.8078.80",
+  "at": "2026-11-04T16:32:08.896Z",
+  "cases": [
+    {
+      "name": "/",
+      "status": 200,
+      "headers": {
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "name": "/auth-lab.html",
+      "status": 200,
+      "headers": {
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "name": "/browser-lab.html",
+      "status": 200,
+      "headers": {
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "name": "/lr04-probe.html",
+      "status": 200,
+      "headers": {
+        "content-security-policy": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      }
+    },
+    {
+      "name": "image-blocked",
+      "violations": [
+        {
+          "directive": "img-src",
+          "blockedURI": "http://localhost:4173/x.png",
+          "disposition": "enforce"
+        }
+      ]
+    },
+    {
+      "name": "cross-origin-embedding",
+      "windowLength": 0,
+      "console": [
+        "Failed to load resource: the server responded with a status of 404 (File not found)",
+        "Framing 'http://localhost:5080/' violates the following Content Security Policy directive: \"frame-ancestors 'self'\". The request has been blocked.\n"
+      ]
+    }
+  ],
+  "resources": [
+    "http://localhost:5080/",
+    "http://localhost:5080/api/incidents",
+    "http://localhost:5080/api/incidents/20000000-0000-0000-0000-000000000001",
+    "http://localhost:5080/api/incidents/20000000-0000-0000-0000-000000000005",
+    "http://localhost:5080/api/me",
+    "http://localhost:5080/app.js?v=lr01-full-summary",
+    "http://localhost:5080/auth-lab.css",
+    "http://localhost:5080/auth-lab.html",
+    "http://localhost:5080/auth-lab.js",
+    "http://localhost:5080/browser-lab.html",
+    "http://localhost:5080/browser-lab.js",
+    "http://localhost:5080/lr04-probe.css",
+    "http://localhost:5080/lr04-probe.html",
+    "http://localhost:5080/lr04-probe.js",
+    "http://localhost:5080/styles.css"
+  ],
+  "legitimateConsole": [
+    "Loading the image 'http://localhost:4173/x.png' violates the following Content Security Policy directive: \"img-src 'self'\". The action has been blocked."
+  ]
+}

@@ -1,0 +1,230 @@
+{
+  "stage": "vulnerable",
+  "browser": "156.0.8078.80",
+  "at": "2026-11-04T16:16:04.856Z",
+  "cases": [
+    {
+      "name": "seed-normal-flow",
+      "status": 200,
+      "json": {
+        "id": "20000000-0000-0000-0000-000000000001",
+        "title": "Підозрілий лист із вкладенням",
+        "description": "Одержано лист нібито від деканату. Вкладення не відкривалося.",
+        "severity": "Medium",
+        "status": "Triaged",
+        "occurredAtUtc": "2026-08-01T08:30:00+00:00",
+        "createdAtUtc": "2026-08-01T09:00:00+00:00",
+        "ownerDisplayName": "Аліса Коваль",
+        "comments": [
+          {
+            "id": "30000000-0000-0000-0000-000000000001",
+            "authorDisplayName": "Морган Литвин",
+            "text": "Заголовки листа передано аналітику.",
+            "createdAtUtc": "2026-08-01T09:30:00+00:00"
+          },
+          {
+            "id": "30000000-0000-0000-0000-000000000005",
+            "authorDisplayName": "Морган Литвин",
+            "text": "<img src=x onerror=\"document.querySelector('#lab05-marker-target').setAttribute('data-lab05-marker','executed')\">",
+            "createdAtUtc": "2026-08-01T09:35:00+00:00"
+          }
+        ]
+      },
+      "dom": {
+        "marker": "executed",
+        "description": {
+          "text": "Одержано лист нібито від деканату. Вкладення не відкривалося.",
+          "children": 0
+        },
+        "comments": [
+          {
+            "text": "Заголовки листа передано аналітику.",
+            "children": 0
+          },
+          {
+            "text": "",
+            "children": 1
+          }
+        ],
+        "status": "GET: 200"
+      }
+    },
+    {
+      "name": "description-alice",
+      "id": "d35157fd-bff5-4c12-959c-d48172756629",
+      "status": 200,
+      "json": {
+        "id": "d35157fd-bff5-4c12-959c-d48172756629",
+        "title": "LR05 canonical harmless marker",
+        "description": "<img src=x onerror=\"document.querySelector('#lab05-marker-target').setAttribute('data-lab05-marker','executed')\">",
+        "severity": "Low",
+        "status": "New",
+        "occurredAtUtc": "2026-11-04T16:16:06.072+00:00",
+        "createdAtUtc": "2026-11-04T16:16:06.084291+00:00",
+        "ownerDisplayName": "Аліса Коваль",
+        "comments": []
+      },
+      "dom": {
+        "marker": "executed",
+        "description": {
+          "text": "",
+          "children": 1
+        },
+        "comments": [],
+        "status": "GET: 200"
+      }
+    },
+    {
+      "name": "comment-alice",
+      "status": 200,
+      "json": {
+        "id": "20000000-0000-0000-0000-000000000001",
+        "title": "Підозрілий лист із вкладенням",
+        "description": "Одержано лист нібито від деканату. Вкладення не відкривалося.",
+        "severity": "Medium",
+        "status": "Triaged",
+        "occurredAtUtc": "2026-08-01T08:30:00+00:00",
+        "createdAtUtc": "2026-08-01T09:00:00+00:00",
+        "ownerDisplayName": "Аліса Коваль",
+        "comments": [
+          {
+            "id": "30000000-0000-0000-0000-000000000001",
+            "authorDisplayName": "Морган Литвин",
+            "text": "Заголовки листа передано аналітику.",
+            "createdAtUtc": "2026-08-01T09:30:00+00:00"
+          },
+          {
+            "id": "30000000-0000-0000-0000-000000000005",
+            "authorDisplayName": "Морган Литвин",
+            "text": "<img src=x onerror=\"document.querySelector('#lab05-marker-target').setAttribute('data-lab05-marker','executed')\">",
+            "createdAtUtc": "2026-08-01T09:35:00+00:00"
+          }
+        ]
+      },
+      "dom": {
+        "marker": "executed",
+        "description": {
+          "text": "Одержано лист нібито від деканату. Вкладення не відкривалося.",
+          "children": 0
+        },
+        "comments": [
+          {
+            "text": "Заголовки листа передано аналітику.",
+            "children": 0
+          },
+          {
+            "text": "",
+            "children": 1
+          }
+        ],
+        "status": "GET: 200"
+      }
+    },
+    {
+      "name": "description-morgan",
+      "id": "d35157fd-bff5-4c12-959c-d48172756629",
+      "status": 200,
+      "json": {
+        "id": "d35157fd-bff5-4c12-959c-d48172756629",
+        "title": "LR05 canonical harmless marker",
+        "description": "<img src=x onerror=\"document.querySelector('#lab05-marker-target').setAttribute('data-lab05-marker','executed')\">",
+        "severity": "Low",
+        "status": "New",
+        "occurredAtUtc": "2026-11-04T16:16:06.072+00:00",
+        "createdAtUtc": "2026-11-04T16:16:06.084291+00:00",
+        "ownerDisplayName": "Аліса Коваль",
+        "comments": []
+      },
+      "dom": {
+        "marker": "executed",
+        "description": {
+          "text": "",
+          "children": 1
+        },
+        "comments": [],
+        "status": "GET: 200"
+      }
+    },
+    {
+      "name": "comment-morgan",
+      "status": 200,
+      "json": {
+        "id": "20000000-0000-0000-0000-000000000001",
+        "title": "Підозрілий лист із вкладенням",
+        "description": "Одержано лист нібито від деканату. Вкладення не відкривалося.",
+        "severity": "Medium",
+        "status": "Triaged",
+        "occurredAtUtc": "2026-08-01T08:30:00+00:00",
+        "createdAtUtc": "2026-08-01T09:00:00+00:00",
+        "ownerDisplayName": "Аліса Коваль",
+        "comments": [
+          {
+            "id": "30000000-0000-0000-0000-000000000001",
+            "authorDisplayName": "Морган Литвин",
+            "text": "Заголовки листа передано аналітику.",
+            "createdAtUtc": "2026-08-01T09:30:00+00:00"
+          },
+          {
+            "id": "30000000-0000-0000-0000-000000000005",
+            "authorDisplayName": "Морган Литвин",
+            "text": "<img src=x onerror=\"document.querySelector('#lab05-marker-target').setAttribute('data-lab05-marker','executed')\">",
+            "createdAtUtc": "2026-08-01T09:35:00+00:00"
+          },
+          {
+            "id": "30000000-0000-0000-0000-000000000003",
+            "authorDisplayName": "Морган Литвин",
+            "text": "Внутрішня примітка аналітика: перевірити технічні заголовки листа.",
+            "createdAtUtc": "2026-08-01T09:45:00+00:00"
+          }
+        ]
+      },
+      "dom": {
+        "marker": "executed",
+        "description": {
+          "text": "Одержано лист нібито від деканату. Вкладення не відкривалося.",
+          "children": 0
+        },
+        "comments": [
+          {
+            "text": "Заголовки листа передано аналітику.",
+            "children": 0
+          },
+          {
+            "text": "",
+            "children": 1
+          },
+          {
+            "text": "Внутрішня примітка аналітика: перевірити технічні заголовки листа.",
+            "children": 0
+          }
+        ],
+        "status": "GET: 200"
+      }
+    },
+    {
+      "name": "description-bob",
+      "id": "d35157fd-bff5-4c12-959c-d48172756629",
+      "status": 404,
+      "json": null,
+      "dom": {
+        "marker": null,
+        "description": {
+          "text": "",
+          "children": 0
+        },
+        "comments": [],
+        "status": "GET: 404"
+      }
+    }
+  ],
+  "cookies": [
+    {
+      "name": ".AspNetCore.Identity.Application",
+      "domain": "localhost",
+      "path": "/",
+      "httpOnly": true,
+      "sameSite": "Lax",
+      "secure": false
+    }
+  ]
+}

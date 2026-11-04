@@ -1,0 +1,73 @@
+{
+  "suite": "SecureLab.Api.Tests",
+  "counters": {
+    "total": "124",
+    "executed": "124",
+    "passed": "124",
+    "failed": "0",
+    "error": "0",
+    "timeout": "0",
+    "aborted": "0",
+    "inconclusive": "0",
+    "passedButRunAborted": "0",
+    "notRunnable": "0",
+    "notExecuted": "0",
+    "disconnected": "0",
+    "warning": "0",
+    "completed": "0",
+    "inProgress": "0",
+    "pending": "0"
+  },
+  "times": {
+    "creation": "2026-11-04T18:30:45.7733294+02:00",
+    "queuing": "2026-11-04T18:30:45.7733298+02:00",
+    "start": "2026-11-04T18:30:42.3484025+02:00",
+    "finish": "2026-11-04T18:31:18.9042515+02:00"
+  },
+  "newBrowserSecurityCases": [
+    {
+      "name": "SecureLab.Api.Tests.BrowserSecurityTests.AnonymousProtectedGet_Remains401_WithCorsOnlyForTrustedOrigin(origin: \"http://localhost:4173\", allowed: True)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "SecureLab.Api.Tests.BrowserSecurityTests.ClientDocuments_EnforceCspAndBrowserHeaders(path: \"/auth-lab.html\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "SecureLab.Api.Tests.BrowserSecurityTests.ClientDocuments_EnforceCspAndBrowserHeaders(path: \"/\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "SecureLab.Api.Tests.BrowserSecurityTests.ClientDocuments_EnforceCspAndBrowserHeaders(path: \"/browser-lab.html\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "SecureLab.Api.Tests.BrowserSecurityTests.AnonymousProtectedGet_Remains401_WithCorsOnlyForTrustedOrigin(origin: \"http://localhost:4174\", allowed: False)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "SecureLab.Api.Tests.BrowserSecurityTests.Production_DoesNotRegisterOrApplyTeachingCorsPolicy",
+      "outcome": "Passed"
+    },
+    {
+      "name": "SecureLab.Api.Tests.BrowserSecurityTests.Preflight_AllowsExactOriginMethodAndHeader(origin: \"http://localhost:4174\", allowed: False)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "SecureLab.Api.Tests.BrowserSecurityTests.ClientDocuments_EnforceCspAndBrowserHeaders(path: \"/lr04-probe.html\")",
+      "outcome": "Passed"
+    },
+    {
+      "name": "SecureLab.Api.Tests.BrowserSecurityTests.SimpleHealth_ExecutesForBothOrigins_ButOnlyAllowsTrustedOrigin(origin: \"http://localhost:4173\", allowed: True)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "SecureLab.Api.Tests.BrowserSecurityTests.Preflight_AllowsExactOriginMethodAndHeader(origin: \"http://localhost:4173\", allowed: True)",
+      "outcome": "Passed"
+    },
+    {
+      "name": "SecureLab.Api.Tests.BrowserSecurityTests.SimpleHealth_ExecutesForBothOrigins_ButOnlyAllowsTrustedOrigin(origin: \"http://localhost:4174\", allowed: False)",
+      "outcome": "Passed"
+    }
+  ]
+}

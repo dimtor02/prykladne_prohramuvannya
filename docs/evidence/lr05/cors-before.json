@@ -1,0 +1,289 @@
+{
+  "stage": "cors-before",
+  "browser": "156.0.8078.80",
+  "at": "2026-11-04T16:18:09.875Z",
+  "cases": [
+    {
+      "name": "4173-simple",
+      "readable": false,
+      "error": "TypeError: Failed to fetch",
+      "network": [
+        {
+          "event": "request",
+          "id": "26636.5",
+          "method": "GET",
+          "url": "http://localhost:5080/health?lr05=cors-before-4173-simple",
+          "headers": {}
+        },
+        {
+          "event": "actually-sent",
+          "id": "26636.5",
+          "headers": {
+            "Origin": "http://localhost:4173"
+          },
+          "cookiePresent": false
+        },
+        {
+          "event": "server-response",
+          "id": "26636.5",
+          "status": 200,
+          "headers": {}
+        }
+      ],
+      "console": [
+        "Access to fetch at 'http://localhost:5080/health?lr05=cors-before-4173-simple' from origin 'http://localhost:4173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED"
+      ]
+    },
+    {
+      "name": "4173-preflight",
+      "readable": false,
+      "error": "TypeError: Failed to fetch",
+      "network": [
+        {
+          "event": "request",
+          "id": "27932.4",
+          "method": "GET",
+          "url": "http://localhost:5080/health?lr05=cors-before-4173-preflight",
+          "headers": {}
+        },
+        {
+          "event": "request",
+          "id": "872638E35CBA5D16EF2417CB7F5CFF71",
+          "method": "OPTIONS",
+          "url": "http://localhost:5080/health?lr05=cors-before-4173-preflight",
+          "headers": {
+            "Access-Control-Request-Headers": "x-lab-cors-probe",
+            "Access-Control-Request-Method": "GET",
+            "Origin": "http://localhost:4173"
+          }
+        },
+        {
+          "event": "actually-sent",
+          "id": "872638E35CBA5D16EF2417CB7F5CFF71",
+          "headers": {
+            "Access-Control-Request-Headers": "x-lab-cors-probe",
+            "Access-Control-Request-Method": "GET",
+            "Origin": "http://localhost:4173"
+          },
+          "cookiePresent": false
+        },
+        {
+          "event": "server-response",
+          "id": "872638E35CBA5D16EF2417CB7F5CFF71",
+          "status": 405,
+          "headers": {}
+        }
+      ],
+      "console": [
+        "Access to fetch at 'http://localhost:5080/health?lr05=cors-before-4173-preflight' from origin 'http://localhost:4173' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED"
+      ]
+    },
+    {
+      "name": "4173-cookie",
+      "readable": false,
+      "error": "TypeError: Failed to fetch",
+      "network": [
+        {
+          "event": "request",
+          "id": "28048.4",
+          "method": "GET",
+          "url": "http://localhost:5080/api/incidents?lr05=cors-before-4173-cookie",
+          "headers": {}
+        },
+        {
+          "event": "actually-sent",
+          "id": "28048.4",
+          "headers": {
+            "Origin": "http://localhost:4173"
+          },
+          "cookiePresent": true
+        },
+        {
+          "event": "server-response",
+          "id": "28048.4",
+          "status": 200,
+          "headers": {}
+        }
+      ],
+      "console": [
+        "Access to fetch at 'http://localhost:5080/api/incidents?lr05=cors-before-4173-cookie' from origin 'http://localhost:4173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED"
+      ]
+    },
+    {
+      "name": "4173-without-cookie",
+      "readable": false,
+      "error": "TypeError: Failed to fetch",
+      "network": [
+        {
+          "event": "request",
+          "id": "28140.4",
+          "method": "GET",
+          "url": "http://localhost:5080/api/incidents?lr05=cors-before-4173-without-cookie",
+          "headers": {}
+        },
+        {
+          "event": "actually-sent",
+          "id": "28140.4",
+          "headers": {
+            "Origin": "http://localhost:4173"
+          },
+          "cookiePresent": false
+        },
+        {
+          "event": "server-response",
+          "id": "28140.4",
+          "status": 401,
+          "headers": {}
+        }
+      ],
+      "console": [
+        "Access to fetch at 'http://localhost:5080/api/incidents?lr05=cors-before-4173-without-cookie' from origin 'http://localhost:4173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED"
+      ]
+    },
+    {
+      "name": "4174-simple",
+      "readable": false,
+      "error": "TypeError: Failed to fetch",
+      "network": [
+        {
+          "event": "request",
+          "id": "28388.5",
+          "method": "GET",
+          "url": "http://localhost:5080/health?lr05=cors-before-4174-simple",
+          "headers": {}
+        },
+        {
+          "event": "actually-sent",
+          "id": "28388.5",
+          "headers": {
+            "Origin": "http://localhost:4174"
+          },
+          "cookiePresent": false
+        },
+        {
+          "event": "server-response",
+          "id": "28388.5",
+          "status": 200,
+          "headers": {}
+        }
+      ],
+      "console": [
+        "Access to fetch at 'http://localhost:5080/health?lr05=cors-before-4174-simple' from origin 'http://localhost:4174' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED"
+      ]
+    },
+    {
+      "name": "4174-preflight",
+      "readable": false,
+      "error": "TypeError: Failed to fetch",
+      "network": [
+        {
+          "event": "request",
+          "id": "28596.4",
+          "method": "GET",
+          "url": "http://localhost:5080/health?lr05=cors-before-4174-preflight",
+          "headers": {}
+        },
+        {
+          "event": "request",
+          "id": "7869C68B6A00349A6802C7F7DFEFFB76",
+          "method": "OPTIONS",
+          "url": "http://localhost:5080/health?lr05=cors-before-4174-preflight",
+          "headers": {
+            "Access-Control-Request-Headers": "x-lab-cors-probe",
+            "Access-Control-Request-Method": "GET",
+            "Origin": "http://localhost:4174"
+          }
+        },
+        {
+          "event": "actually-sent",
+          "id": "7869C68B6A00349A6802C7F7DFEFFB76",
+          "headers": {
+            "Access-Control-Request-Headers": "x-lab-cors-probe",
+            "Access-Control-Request-Method": "GET",
+            "Origin": "http://localhost:4174"
+          },
+          "cookiePresent": false
+        },
+        {
+          "event": "server-response",
+          "id": "7869C68B6A00349A6802C7F7DFEFFB76",
+          "status": 405,
+          "headers": {}
+        }
+      ],
+      "console": [
+        "Access to fetch at 'http://localhost:5080/health?lr05=cors-before-4174-preflight' from origin 'http://localhost:4174' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED"
+      ]
+    },
+    {
+      "name": "4174-cookie",
+      "readable": false,
+      "error": "TypeError: Failed to fetch",
+      "network": [
+        {
+          "event": "request",
+          "id": "25052.4",
+          "method": "GET",
+          "url": "http://localhost:5080/api/incidents?lr05=cors-before-4174-cookie",
+          "headers": {}
+        },
+        {
+          "event": "actually-sent",
+          "id": "25052.4",
+          "headers": {
+            "Origin": "http://localhost:4174"
+          },
+          "cookiePresent": true
+        },
+        {
+          "event": "server-response",
+          "id": "25052.4",
+          "status": 200,
+          "headers": {}
+        }
+      ],
+      "console": [
+        "Access to fetch at 'http://localhost:5080/api/incidents?lr05=cors-before-4174-cookie' from origin 'http://localhost:4174' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED"
+      ]
+    },
+    {
+      "name": "4174-without-cookie",
+      "readable": false,
+      "error": "TypeError: Failed to fetch",
+      "network": [
+        {
+          "event": "request",
+          "id": "28004.4",
+          "method": "GET",
+          "url": "http://localhost:5080/api/incidents?lr05=cors-before-4174-without-cookie",
+          "headers": {}
+        },
+        {
+          "event": "actually-sent",
+          "id": "28004.4",
+          "headers": {
+            "Origin": "http://localhost:4174"
+          },
+          "cookiePresent": false
+        },
+        {
+          "event": "server-response",
+          "id": "28004.4",
+          "status": 401,
+          "headers": {}
+        }
+      ],
+      "console": [
+        "Access to fetch at 'http://localhost:5080/api/incidents?lr05=cors-before-4174-without-cookie' from origin 'http://localhost:4174' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED"
+      ]
+    }
+  ]
+}

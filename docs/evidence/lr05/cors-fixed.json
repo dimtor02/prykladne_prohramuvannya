@@ -1,0 +1,318 @@
+{
+  "stage": "cors-fixed",
+  "browser": "156.0.8078.80",
+  "at": "2026-11-04T16:32:08.907Z",
+  "cases": [
+    {
+      "name": "4173-simple",
+      "readable": true,
+      "status": 200,
+      "body": "{\"status\":\"ready\"}",
+      "network": [
+        {
+          "event": "request",
+          "id": "27812.5",
+          "method": "GET",
+          "url": "http://localhost:5080/health?lr05=cors-fixed-4173-simple",
+          "headers": {}
+        },
+        {
+          "event": "actually-sent",
+          "id": "27812.5",
+          "headers": {
+            "Origin": "http://localhost:4173"
+          },
+          "cookiePresent": false
+        },
+        {
+          "event": "server-response",
+          "id": "27812.5",
+          "status": 200,
+          "headers": {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "http://localhost:4173"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "name": "4173-preflight",
+      "readable": true,
+      "status": 200,
+      "body": "{\"status\":\"ready\"}",
+      "network": [
+        {
+          "event": "request",
+          "id": "28852.4",
+          "method": "GET",
+          "url": "http://localhost:5080/health?lr05=cors-fixed-4173-preflight",
+          "headers": {}
+        },
+        {
+          "event": "request",
+          "id": "35C81D571DE2E0056BD5DF4E37D8B423",
+          "method": "OPTIONS",
+          "url": "http://localhost:5080/health?lr05=cors-fixed-4173-preflight",
+          "headers": {
+            "Access-Control-Request-Headers": "x-lab-cors-probe",
+            "Access-Control-Request-Method": "GET",
+            "Origin": "http://localhost:4173"
+          }
+        },
+        {
+          "event": "actually-sent",
+          "id": "35C81D571DE2E0056BD5DF4E37D8B423",
+          "headers": {
+            "Access-Control-Request-Headers": "x-lab-cors-probe",
+            "Access-Control-Request-Method": "GET",
+            "Origin": "http://localhost:4173"
+          },
+          "cookiePresent": false
+        },
+        {
+          "event": "server-response",
+          "id": "35C81D571DE2E0056BD5DF4E37D8B423",
+          "status": 204,
+          "headers": {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Headers": "X-Lab-Cors-Probe",
+            "Access-Control-Allow-Methods": "GET",
+            "Access-Control-Allow-Origin": "http://localhost:4173"
+          }
+        },
+        {
+          "event": "actually-sent",
+          "id": "28852.4",
+          "headers": {
+            "Origin": "http://localhost:4173"
+          },
+          "cookiePresent": false
+        },
+        {
+          "event": "server-response",
+          "id": "28852.4",
+          "status": 200,
+          "headers": {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "http://localhost:4173"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "name": "4173-cookie",
+      "readable": true,
+      "status": 200,
+      "body": "[{\"id\":\"74072eb4-47fc-4d50-9b60-b1111a227221\",\"title\":\"LR05 fixed mw2c478b normal 0\",\"severity\":\"Low\",\"status\":\"New\",\"occurredAtUtc\":\"2026-11-04T16:32:10.843+00:00\",\"createdAtUtc\":\"2026-11-04T16:32:10.865254+00:00\"},{\"id\":\"20000000-0000-0000-0000-000000000005\",\"title\":\"Перевірка USB навчальної мережі\",\"severity\":\"Low\",\"status\":\"New\",\"occurredAtUtc\":\"2026-08-03T09:00:00+00:00\",\"createdAtUtc\":\"2026-08-03T09:00:00+00:00\"},{\"id\":\"20000000-0000-0000-0000-000000000003\",\"title\":\"Перевірка журналу комп'ютерного класу\",\"severity\":\"Low\",\"status\":\"New\",\"occurredAtUtc\":\"2026-08-03T07:45:00+00:00\",\"createdAtUtc\":\"2026-08-03T08:00:00+00:00\"},{\"id\":\"20000000-0000-0000-0000-000000000001\",\"title\":\"Підозрілий лист із вкладенням\",\"severity\":\"Medium\",\"status\":\"Triaged\",\"occurredAtUtc\":\"2026-08-01T08:30:00+00:00\",\"createdAtUtc\":\"2026-08-01T09:00:00+00:00\"}]",
+      "network": [
+        {
+          "event": "request",
+          "id": "28964.4",
+          "method": "GET",
+          "url": "http://localhost:5080/api/incidents?lr05=cors-fixed-4173-cookie",
+          "headers": {}
+        },
+        {
+          "event": "actually-sent",
+          "id": "28964.4",
+          "headers": {
+            "Origin": "http://localhost:4173"
+          },
+          "cookiePresent": true
+        },
+        {
+          "event": "server-response",
+          "id": "28964.4",
+          "status": 200,
+          "headers": {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "http://localhost:4173"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "name": "4173-without-cookie",
+      "readable": true,
+      "status": 401,
+      "body": "{\"type\":\"https://tools.ietf.org/html/rfc9110#section-15.5.2\",\"title\":\"Unauthorized\",\"status\":401,\"traceId\":\"00-fb43766c0be33a94af88a82b803f8e72-09c29f5b82952dde-00\"}",
+      "network": [
+        {
+          "event": "request",
+          "id": "29080.4",
+          "method": "GET",
+          "url": "http://localhost:5080/api/incidents?lr05=cors-fixed-4173-without-cookie",
+          "headers": {}
+        },
+        {
+          "event": "actually-sent",
+          "id": "29080.4",
+          "headers": {
+            "Origin": "http://localhost:4173"
+          },
+          "cookiePresent": false
+        },
+        {
+          "event": "server-response",
+          "id": "29080.4",
+          "status": 401,
+          "headers": {
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "http://localhost:4173"
+          }
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ]
+    },
+    {
+      "name": "4174-simple",
+      "readable": false,
+      "error": "TypeError: Failed to fetch",
+      "network": [
+        {
+          "event": "request",
+          "id": "29176.5",
+          "method": "GET",
+          "url": "http://localhost:5080/health?lr05=cors-fixed-4174-simple",
+          "headers": {}
+        },
+        {
+          "event": "actually-sent",
+          "id": "29176.5",
+          "headers": {
+            "Origin": "http://localhost:4174"
+          },
+          "cookiePresent": false
+        },
+        {
+          "event": "server-response",
+          "id": "29176.5",
+          "status": 200,
+          "headers": {}
+        }
+      ],
+      "console": [
+        "Access to fetch at 'http://localhost:5080/health?lr05=cors-fixed-4174-simple' from origin 'http://localhost:4174' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED"
+      ]
+    },
+    {
+      "name": "4174-preflight",
+      "readable": false,
+      "error": "TypeError: Failed to fetch",
+      "network": [
+        {
+          "event": "request",
+          "id": "29264.4",
+          "method": "GET",
+          "url": "http://localhost:5080/health?lr05=cors-fixed-4174-preflight",
+          "headers": {}
+        },
+        {
+          "event": "request",
+          "id": "C84BD13C477089D939384DB52F2920A8",
+          "method": "OPTIONS",
+          "url": "http://localhost:5080/health?lr05=cors-fixed-4174-preflight",
+          "headers": {
+            "Access-Control-Request-Headers": "x-lab-cors-probe",
+            "Access-Control-Request-Method": "GET",
+            "Origin": "http://localhost:4174"
+          }
+        },
+        {
+          "event": "actually-sent",
+          "id": "C84BD13C477089D939384DB52F2920A8",
+          "headers": {
+            "Access-Control-Request-Headers": "x-lab-cors-probe",
+            "Access-Control-Request-Method": "GET",
+            "Origin": "http://localhost:4174"
+          },
+          "cookiePresent": false
+        },
+        {
+          "event": "server-response",
+          "id": "C84BD13C477089D939384DB52F2920A8",
+          "status": 204,
+          "headers": {}
+        }
+      ],
+      "console": [
+        "Access to fetch at 'http://localhost:5080/health?lr05=cors-fixed-4174-preflight' from origin 'http://localhost:4174' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED"
+      ]
+    },
+    {
+      "name": "4174-cookie",
+      "readable": false,
+      "error": "TypeError: Failed to fetch",
+      "network": [
+        {
+          "event": "request",
+          "id": "29440.4",
+          "method": "GET",
+          "url": "http://localhost:5080/api/incidents?lr05=cors-fixed-4174-cookie",
+          "headers": {}
+        },
+        {
+          "event": "actually-sent",
+          "id": "29440.4",
+          "headers": {
+            "Origin": "http://localhost:4174"
+          },
+          "cookiePresent": true
+        },
+        {
+          "event": "server-response",
+          "id": "29440.4",
+          "status": 200,
+          "headers": {}
+        }
+      ],
+      "console": [
+        "Access to fetch at 'http://localhost:5080/api/incidents?lr05=cors-fixed-4174-cookie' from origin 'http://localhost:4174' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED"
+      ]
+    },
+    {
+      "name": "4174-without-cookie",
+      "readable": false,
+      "error": "TypeError: Failed to fetch",
+      "network": [
+        {
+          "event": "request",
+          "id": "29524.4",
+          "method": "GET",
+          "url": "http://localhost:5080/api/incidents?lr05=cors-fixed-4174-without-cookie",
+          "headers": {}
+        },
+        {
+          "event": "actually-sent",
+          "id": "29524.4",
+          "headers": {
+            "Origin": "http://localhost:4174"
+          },
+          "cookiePresent": false
+        },
+        {
+          "event": "server-response",
+          "id": "29524.4",
+          "status": 401,
+          "headers": {}
+        }
+      ],
+      "console": [
+        "Access to fetch at 'http://localhost:5080/api/incidents?lr05=cors-fixed-4174-without-cookie' from origin 'http://localhost:4174' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+        "Failed to load resource: net::ERR_FAILED"
+      ]
+    },
+    {
+      "name": "4173-anonymous-include",
+      "status": 401
+    }
+  ]
+}

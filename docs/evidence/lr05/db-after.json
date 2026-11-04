@@ -1,0 +1,11 @@
+[
+  {
+    "id": "d35157fd-bff5-4c12-959c-d48172756629",
+    "description": "<img src=x onerror=\"document.querySelector('#lab05-marker-target').setAttribute('data-lab05-marker','executed')\">"
+  },
+  {
+    "id": "30000000-0000-0000-0000-000000000005",
+    "text": "<img src=x onerror=\"document.querySelector('#lab05-marker-target').setAttribute('data-lab05-marker','executed')\">",
+    "isInternal": false
+  }
+]
