@@ -16,7 +16,8 @@
 | Base / entry_parent | 0416fb1378cec41bc08d67d34d814e0fc498d087, тег v0.4.0 |
 | Гілка | lab/5-browser-xss |
 | Vulnerable commit | 3f7f726d6b6b2de26172497ce2fa77beffe11a7d |
-| Fixed commit / v0.5.0 / main | Очікують Git-дій студента; наразі не заявляються виконаними |
+| Fixed commit реалізації | `9e0cc41826d3942ded60976b96b32bc31477dae1` — створено студентом, після commit робоче дерево було чистим |
+| Release tag / main | `v0.5.0` створюється після документаційного commit; фінальні main і lab/5-browser-xss мають збігатися з `v0.5.0^{commit}`. Стан refs перевіряється за виводом Git |
 | Спосіб подання Git | Ще не обрано: погоджений приватний remote або перевірений bundle |
 
 Vulnerable browser-lab.js відповідав виданому scaffold без safe fix/CSP.
@@ -206,4 +207,6 @@ Search доступний без входу й без subject scope; severity-su
 
 Матеріали не містять пароля, cookie/token values або export storage.
 Перевірений набір source/test файлів зафіксовано у [SHA-256 manifest](evidence/lr05/verified-files.sha256).
-Git hashes після fixed commit і tag буде додано за фактичним виводом студента.
+Hash fixed commit реалізації додано за фактичним виводом студента. Після commit
+повторно звірено 9 контрольних сум source/test файлів — усі збігаються. Наступна
+документаційна зміна не змінює перевіреного коду; release commit визначає підсумковий тег.
