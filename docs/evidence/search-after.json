@@ -1,0 +1,66 @@
+{
+  "recordedAtUtc": "2026-10-19T17:51:47.993836+00:00",
+  "phase": "after",
+  "environment": "Development, localhost:5080, synthetic seed (5 incidents)",
+  "vulnerableCommit": "dda77df233f9d3f460e6d6e2382069b3bcfbfe22",
+  "controlScenario": "tests/http/lab-02-security.http, C",
+  "results": [
+    {
+      "case": "A-usb",
+      "status": 200,
+      "contentType": "application/json",
+      "body": [
+        {
+          "id": "20000000-0000-0000-0000-000000000005",
+          "title": "Перевірка USB навчальної мережі",
+          "description": "Навчальний запис для перевірки пошуку без реальних персональних даних.",
+          "severity": "Low",
+          "status": "New",
+          "createdAtUtc": "2026-08-03T09:00:00+00:00"
+        }
+      ]
+    },
+    {
+      "case": "B-no-match",
+      "status": 200,
+      "contentType": "application/json",
+      "body": []
+    },
+    {
+      "case": "C-control",
+      "status": 200,
+      "contentType": "application/json",
+      "body": []
+    },
+    {
+      "case": "D-apostrophe",
+      "status": 200,
+      "contentType": "application/json",
+      "body": [
+        {
+          "id": "20000000-0000-0000-0000-000000000004",
+          "title": "O'Brien classroom report",
+          "description": "Навчальний запис для перевірки пошуку без реальних персональних даних.",
+          "severity": "Low",
+          "status": "New",
+          "createdAtUtc": "2026-08-03T09:00:00+00:00"
+        }
+      ]
+    },
+    {
+      "case": "D-ukrainian-apostrophe",
+      "status": 200,
+      "contentType": "application/json",
+      "body": [
+        {
+          "id": "20000000-0000-0000-0000-000000000003",
+          "title": "Перевірка журналу комп'ютерного класу",
+          "description": "Текст <script> має відображатися як текст, а не виконуватися як HTML.",
+          "severity": "Low",
+          "status": "New",
+          "createdAtUtc": "2026-08-03T08:00:00+00:00"
+        }
+      ]
+    }
+  ]
+}

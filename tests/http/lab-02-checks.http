@@ -1,0 +1,114 @@
+@api = http://localhost:5080
+@title = LR02-manual-001
+
+# Перед повторним прогоном змініть title або відновіть навчальний seed.
+# Дата зі зміщенням має зберегтися як 2026-09-01T10:00:00Z.
+
+### USB: scaffold installation check (200, one incident)
+GET {{api}}/api/incidents/search?q=USB
+
+### T-01: коректне створення (201); збережіть Location з відповіді
+POST {{api}}/api/incidents
+Content-Type: application/json
+
+{
+  "title": "  {{title}}  ",
+  "description": "  Штучний навчальний інцидент для перевірки контракту.  ",
+  "severity": "Low",
+  "occurredAtUtc": "2026-09-01T13:00:00+03:00"
+}
+
+### T-03: після T-01 той самий title (409)
+POST {{api}}/api/incidents
+Content-Type: application/json
+
+{
+  "title": "{{title}}",
+  "description": "Повторне повідомлення про навчальний інцидент.",
+  "severity": "Low",
+  "occurredAtUtc": "2026-09-01T10:00:00Z"
+}
+
+### T-02: пробільний title (400, errors.title)
+POST {{api}}/api/incidents
+Content-Type: application/json
+
+{
+  "title": "   ",
+  "description": "Штучний опис для перевірки обов'язкового заголовка.",
+  "severity": "Low",
+  "occurredAtUtc": "2026-09-01T10:00:00Z"
+}
+
+### CP-01/T-02: числовий рядок severity (400, errors.severity)
+POST {{api}}/api/incidents
+Content-Type: application/json
+
+{
+  "title": "{{title}}-enum",
+  "description": "Синтаксично правильний JSON із недопустимим severity.",
+  "severity": "7",
+  "occurredAtUtc": "2026-09-01T10:00:00Z"
+}
+
+### T-02: відсутня дата (400, errors.occurredAtUtc)
+POST {{api}}/api/incidents
+Content-Type: application/json
+
+{
+  "title": "{{title}}-missing-date",
+  "description": "Штучний опис для перевірки обов'язкової дати.",
+  "severity": "Low"
+}
+
+### T-02: дата в майбутньому (400, errors.occurredAtUtc)
+POST {{api}}/api/incidents
+Content-Type: application/json
+
+{
+  "title": "{{title}}-future",
+  "description": "Штучний опис для перевірки майбутньої дати.",
+  "severity": "Low",
+  "occurredAtUtc": "2099-01-01T00:00:00Z"
+}
+
+### T-09: High, 39 символів після Trim (400, errors.description)
+POST {{api}}/api/incidents
+Content-Type: application/json
+
+{
+  "title": "{{title}}-high-39",
+  "description": "  012345678901234567890123456789012345678  ",
+  "severity": "High",
+  "occurredAtUtc": "2026-09-01T10:00:00Z"
+}
+
+### T-09: High, 40 символів після Trim (201)
+POST {{api}}/api/incidents
+Content-Type: application/json
+
+{
+  "title": "{{title}}-high-40",
+  "description": "  0123456789012345678901234567890123456789  ",
+  "severity": "High",
+  "occurredAtUtc": "2026-09-01T10:00:00Z"
+}
+
+### CP-01: серверні поля ігноруються (201); перевірте запис через GET за Location
+POST {{api}}/api/incidents
+Content-Type: application/json
+
+{
+  "title": "{{title}}-server-fields",
+  "description": "Клієнт намагається підмінити власника, статус і службові поля.",
+  "severity": "Low",
+  "occurredAtUtc": "2026-09-01T10:00:00Z",
+  "id": "99999999-9999-9999-9999-999999999999",
+  "ownerUserId": "10000000-0000-0000-0000-000000000002",
+  "status": "Closed",
+  "createdAtUtc": "2000-01-01T00:00:00Z",
+  "updatedAtUtc": "2000-01-01T00:00:00Z"
+}
+
+### T-06: відсутній ресурс (404 Problem Details)
+GET {{api}}/api/incidents/99999999-9999-9999-9999-999999999999

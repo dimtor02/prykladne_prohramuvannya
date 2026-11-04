@@ -25,6 +25,23 @@ Accept: application/json
 GET {{host}}/api/incidents?status=Unknown
 Accept: application/json
 
-### Lab 1 extension point: expected 501 before student implementation
+### T-06: 200; all levels, explicit Low -> Medium -> High -> Critical order
+# Seed: Low=1, Medium=1, High=1, Critical=0. Each item has only severity/count.
 GET {{host}}/api/incidents/severity-summary
+Accept: application/json
+
+### T-06a: 200; Low=0, Medium=1, High=0, Critical=0
+GET {{host}}/api/incidents/severity-summary?status=Triaged
+Accept: application/json
+
+### T-06b: 200; Low=0, Medium=0, High=0, Critical=0
+GET {{host}}/api/incidents/severity-summary?status=Resolved
+Accept: application/json
+
+### T-06c: 400 application/problem+json; errors.status
+GET {{host}}/api/incidents/severity-summary?status=Unknown
+Accept: application/json
+
+### Numeric enum input is outside the summary allowlist: 400
+GET {{host}}/api/incidents/severity-summary?status=1
 Accept: application/json

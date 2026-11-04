@@ -1,0 +1,15 @@
+Local Development search probe, 2026-10-19. Full SQL and connection strings omitted.
+
+Before correction (vulnerable commit dda77df233f9d3f460e6d6e2382069b3bcfbfe22):
+5 search commands were logged with Parameters=[].
+The legitimate apostrophe searches produced PostgreSQL SQLSTATE 42601 (syntax error).
+Source location: Lab02Endpoints.MapLab02Endpoints, vulnerable lines 18 and 20-22.
+
+After correction:
+Executed DbCommand (5ms) [Parameters=[@pattern='?', @pattern0='?', @p='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+Executed DbCommand (2ms) [Parameters=[@pattern='?', @pattern0='?', @p='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+Executed DbCommand (1ms) [Parameters=[@pattern='?', @pattern0='?', @p='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+Executed DbCommand (1ms) [Parameters=[@pattern='?', @pattern0='?', @p='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+Executed DbCommand (1ms) [Parameters=[@pattern='?', @pattern0='?', @p='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+
+The request value is now passed through EF Core parameters. Sorting is selected by typed LINQ expressions after endpoint allowlist validation.
